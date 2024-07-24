@@ -47,15 +47,15 @@ export default async function Navbar() {
                   </SheetHeader>
 
                   <div className="mt-4 flex flex-col gap-1 border-t pt-4">
-                    <Button variant="ghost" className="w-full justify-start gap-2">
+                    <Button variant="ghost" className="w-full justify-start">
                       <Image src="/icons/user.png" alt="profile" width={19} height={19} />
                       <p>Profile</p>
                     </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
+                    <Button variant="ghost" className="w-full justify-start">
                       <Image src="/icons/library.svg" alt="library" width={19} height={19} />
                       <p>Library</p>
                     </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-2">
+                    <Button variant="ghost" className="w-full justify-start">
                       <Image src="/icons/settings.svg" alt="settings" width={19} height={19} />
                       <p>Account Settings</p>
                     </Button>

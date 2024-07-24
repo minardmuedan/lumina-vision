@@ -3,13 +3,14 @@ import { Button } from '@/components/ui/button'
 import { GridWrapperUl } from '@/components/wrapper'
 import Image from 'next/image'
 
-export default async function GalleryPage() {
+export default async function CollectionsPage() {
   await new Promise((res) => setTimeout(res, 5000))
+
   return (
-    <section className="container w-full space-y-5 pt-5">
+    <div className="space-y-5">
       <div className="flex gap-3">
-        <SearchInput placeholder="Search for a photo..." className="w-full" />
-        <Button>
+        <SearchInput placeholder="Search for a collection..." className="flex-1" />
+        <Button className="gap-2">
           <p>Filter</p>
           <Image src="/icons/filter.svg" alt="filter-icon" width={19} height={19} className="invert" />
         </Button>
@@ -24,6 +25,6 @@ export default async function GalleryPage() {
             </li>
           ))}
       </GridWrapperUl>
-    </section>
+    </div>
   )
 }

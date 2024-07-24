@@ -11,6 +11,15 @@ const config = {
         '2xl': '1400px',
       },
     },
+    fontFamily: {
+      calstavier: 'var(--font-calstavier)',
+    },
+    minHeight: {
+      dvhMinusNav: 'calc(100dvh - 3.5rem)',
+    },
+    maxHeight: {
+      dvhMinusNav: 'calc(100dvh - 3.5rem)',
+    },
     extend: {
       colors: {
         border: 'hsl(var(--border))',

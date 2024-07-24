@@ -1,4 +1,4 @@
-import BackButton from '@/components/custom-btn/back'
+import BackButton from '@/components/back-btn'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import Link from 'next/link'

@@ -68,12 +68,7 @@ export default function LoginForm({ email }: { email: string }) {
               <FormLabel>Password</FormLabel>
               <FormControl>
                 <div className="relative">
-                  <Input
-                    type={isHidden ? 'password' : 'text'}
-                    placeholder="********"
-                    {...field}
-                    className="border-foreground/50 pr-9 focus-visible:border-foreground focus-visible:ring-0"
-                  />
+                  <Input type={isHidden ? 'password' : 'text'} placeholder="********" {...field} className="pr-9" />
                   <button
                     type="button"
                     onClick={() => setIsHidden(!isHidden)}

@@ -1,15 +1,15 @@
 import SearchInput from '@/components/search'
 import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
 import { GridWrapperUl } from '@/components/wrapper'
 import Image from 'next/image'
 
-export default async function GalleryPage() {
-  await new Promise((res) => setTimeout(res, 5000))
+export default function GalleryLoadingFallback() {
   return (
-    <section className="container w-full space-y-5 pt-5">
+    <section className="container max-h-dvhMinusNav w-full space-y-5 overflow-hidden pt-5">
       <div className="flex gap-3">
-        <SearchInput placeholder="Search for a photo..." className="w-full" />
-        <Button>
+        <SearchInput disabled placeholder="Search for a photo..." className="w-full" />
+        <Button disabled>
           <p>Filter</p>
           <Image src="/icons/filter.svg" alt="filter-icon" width={19} height={19} className="invert" />
         </Button>
@@ -20,7 +20,7 @@ export default async function GalleryPage() {
           .fill(0)
           .map((_, i) => (
             <li key={i}>
-              <div className="aspect-[2/1] w-full bg-sky-500"></div>
+              <Skeleton className="h-52 w-full" />
             </li>
           ))}
       </GridWrapperUl>

@@ -65,12 +65,7 @@ export default function LoginEmailForm() {
             <FormItem>
               <FormLabel>Email Address</FormLabel>
               <FormControl>
-                <Input
-                  type="email"
-                  placeholder="example@email.com"
-                  {...field}
-                  className="border-0 border-b border-foreground/50 focus-visible:border-foreground focus-visible:ring-0"
-                />
+                <Input type="email" placeholder="example@email.com" {...field} />
               </FormControl>
               <FormDescription>Enter your email address to continue.</FormDescription>
               <FormMessage />

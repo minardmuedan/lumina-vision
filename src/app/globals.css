@@ -67,6 +67,6 @@
     @apply overflow-x-hidden bg-background font-light text-foreground;
   }
   main {
-    @apply flex min-h-[calc(100dvh-3.5rem)] flex-col items-center justify-center p-5;
+    @apply flex min-h-dvhMinusNav flex-col items-center justify-center px-5 md:px-10;
   }
 }

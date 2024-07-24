@@ -52,13 +52,7 @@ export default function CreatePasswordForm({ tokenId }: { tokenId: string }) {
   return (
     <form noValidate onSubmit={handleSubmit} className="space-y-8">
       <div className="space-y-2">
-        <Input
-          type="text"
-          placeholder="********"
-          onChange={handleOnChange}
-          value={values.password}
-          className="border-0 border-b border-foreground/50 focus-visible:border-foreground focus-visible:ring-0"
-        />
+        <Input type="text" placeholder="********" onChange={handleOnChange} value={values.password} />
 
         <ul className="flex gap-2">
           {Array(4)

@@ -27,7 +27,7 @@ export default function LogoutBtn() {
     <Button
       variant="ghost"
       onClick={handleLogout}
-      className="justify-start gap-2 border border-destructive/0 text-destructive transition-colors ease-in hover:border-destructive hover:bg-background hover:text-destructive"
+      className="justify-start border border-destructive/0 text-destructive transition-colors ease-in hover:border-destructive hover:bg-background hover:text-destructive"
     >
       {isSubmitting ? (
         <Loader />

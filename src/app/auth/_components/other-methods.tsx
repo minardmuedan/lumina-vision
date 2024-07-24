@@ -37,12 +37,7 @@ export default function OtherLoginMethods() {
       </div>
 
       <div className="flex w-full flex-col items-center gap-2 md:flex-row">
-        <Button
-          variant="outline"
-          disabled={isDisable}
-          className="w-full gap-2 bg-accent py-6 hover:bg-accent/75"
-          onClick={() => handleSubmit('google')}
-        >
+        <Button variant="outline" disabled={isDisable} onClick={() => handleSubmit('google')} className="w-full bg-accent py-6 hover:bg-accent/75">
           {isSubmitting.google ? (
             <Loader />
           ) : (
@@ -54,7 +49,7 @@ export default function OtherLoginMethods() {
             </>
           )}
         </Button>
-        <Button variant="outline" disabled={isDisable} className="w-full gap-2 py-6" onClick={() => handleSubmit('github')}>
+        <Button variant="outline" disabled={isDisable} onClick={() => handleSubmit('github')} className="w-full py-6">
           {isSubmitting.github ? (
             <Loader />
           ) : (
