@@ -5,7 +5,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
 
-export default function SearchResultPage({ searchParams }: { searchParams: { v: string } }) {
+export default async function SearchResultPage({ searchParams }: { searchParams: { v: string } }) {
+  await new Promise((res) => setTimeout(res, 5000))
   const navlinks = [
     { src: '/icons/double-picture.svg', label: 'Photos', href: '/' },
     { src: '/icons/collection.svg', label: 'Collections', href: '/collections' },
@@ -23,11 +24,13 @@ export default function SearchResultPage({ searchParams }: { searchParams: { v: 
   return (
     <div className="w-full space-y-14">
       <SearchInput placeholder="Search" />
+
       <Header title={searchParams.v} description={`Search result for ${searchParams.v}`} />
-      <nav className="mb-5 flex items-center gap-3">
+
+      <nav className="flex w-full items-center gap-3 overflow-x-auto">
         {navlinks.map((v, i) => (
           <Button key={i} variant={i > 0 ? 'outline' : 'default'} asChild>
-            <Link href={`/s?v=${searchParams.v}${v.href}`} scroll={false}>
+            <Link href={`/`} scroll={false}>
               <Image src={v.src} alt="icon" width={19} height={19} className={`${i > 0 ? '' : 'invert'}`} />
               <p>{v.label}</p>
             </Link>

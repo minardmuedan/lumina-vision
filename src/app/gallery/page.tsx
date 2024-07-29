@@ -1,29 +1,25 @@
 import SearchInput from '@/components/search'
 import { Button } from '@/components/ui/button'
-import { GridWrapperUl } from '@/components/wrapper'
+import { getPhotos } from '@/lib/unsplash'
 import Image from 'next/image'
+import NoResult from '@/components/no-results'
+import { InfiniteScrollGallery } from '@/components/load-more'
 
 export default async function GalleryPage() {
   await new Promise((res) => setTimeout(res, 5000))
+
+  const photos = await getPhotos()
   return (
-    <section className="container w-full space-y-5 pt-5">
+    <div className="space-y-5">
       <div className="flex gap-3">
         <SearchInput placeholder="Search for a photo..." className="w-full" />
-        <Button>
+        <Button disabled={!photos}>
           <p>Filter</p>
           <Image src="/icons/filter.svg" alt="filter-icon" width={19} height={19} className="invert" />
         </Button>
       </div>
 
-      <GridWrapperUl>
-        {Array(20)
-          .fill(0)
-          .map((_, i) => (
-            <li key={i}>
-              <div className="aspect-[2/1] w-full bg-sky-500"></div>
-            </li>
-          ))}
-      </GridWrapperUl>
-    </section>
+      {photos ? <InfiniteScrollGallery initialPhotos={photos} /> : <NoResult msg="no photo found" />}
+    </div>
   )
 }

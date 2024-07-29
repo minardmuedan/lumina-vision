@@ -1,15 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '@/components/ui/sheet'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { validateRequest } from '@/lib/lucia-auth/session'
-import Navlinks from './client-sub-component'
+import { Navlinks } from './client-sub-component'
 import LogoutBtn from '@/app/auth/_components/logout-btn'
 import { Button } from './ui/button'
 
 export default async function Navbar() {
-  const { user } = await validateRequest()
   return (
     <header className="h-14 border-b">
       <div className="container flex h-full items-center justify-between px-10">
@@ -25,7 +24,8 @@ export default async function Navbar() {
           <div className="flex items-center gap-5">
             <Image src="/icons/search.svg" alt="search" width={19} height={19} />
 
-            {user ? (
+            {false ? (
+              /*
               <Sheet>
                 <SheetTrigger aria-label="open-sheet">
                   <Avatar>
@@ -64,6 +64,7 @@ export default async function Navbar() {
                   </div>
                 </SheetContent>
               </Sheet>
+            */ <></>
             ) : (
               <DropdownMenu>
                 <DropdownMenuTrigger aria-label="open-menu" className="w-fit p-1">

@@ -1,12 +1,11 @@
 import SearchInput from '@/components/search'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { GridWrapperUl } from '@/components/wrapper'
 import Image from 'next/image'
 
-export default function GalleryLoadingFallback() {
+export default function GalleryWithNavLoadingFallback() {
   return (
-    <section className="container max-h-dvhMinusNav w-full space-y-5 overflow-hidden pt-5">
+    <div className="max-h-[calc(100dvh-2.5rem-3.5rem)] space-y-5 overflow-hidden">
       <div className="flex gap-3">
         <SearchInput disabled placeholder="Search for a photo..." className="w-full" />
         <Button disabled>
@@ -14,16 +13,41 @@ export default function GalleryLoadingFallback() {
           <Image src="/icons/filter.svg" alt="filter-icon" width={19} height={19} className="invert" />
         </Button>
       </div>
+      <GalleryLoadingFallback />
+    </div>
+  )
+}
 
-      <GridWrapperUl>
-        {Array(20)
-          .fill(0)
-          .map((_, i) => (
-            <li key={i}>
-              <Skeleton className="h-52 w-full" />
-            </li>
-          ))}
-      </GridWrapperUl>
-    </section>
+export function GalleryLoadingFallback() {
+  const itemRatios = [
+    '2/3',
+    '3/5',
+    '5/3',
+    '4/6',
+    '3/5',
+    '3/2',
+    '3/5',
+    '3/2',
+    '6/9',
+    '5/6',
+    '4/5',
+    '4/6',
+    '3/4',
+    '8/5',
+    '3/2',
+    '3/2',
+    '4/6',
+    '4/4',
+    '3/5',
+    '4/7',
+  ]
+  return (
+    <ul className="columns-2 gap-3 sm:columns-3 md:columns-4">
+      {itemRatios.map((ratio, i) => (
+        <li key={i} style={{ aspectRatio: ratio }} className="mb-3 min-w-[150px]">
+          <Skeleton className="size-full" />
+        </li>
+      ))}
+    </ul>
   )
 }
