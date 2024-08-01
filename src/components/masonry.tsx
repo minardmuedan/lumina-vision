@@ -1,27 +1,31 @@
 'use client'
 
-import { TPhoto, TPhotos } from '@/schema/photo'
-import { Masonry } from 'masonic'
+import { TPhotos } from '@/schema/photo'
 import Link from 'next/link'
-import Image from 'next/image'
+import { MasonryPhotoAlbum } from 'react-photo-album'
+import 'react-photo-album/masonry.css'
 
-export default function GalleryMasonry({ photos, className }: { photos: TPhotos; className?: string }) {
-  return <Masonry columnWidth={150} columnGutter={12} maxColumnCount={4} items={photos} render={Photo} className={`overflow-hidden ${className}`} />
+export default function GalleryMasonry({ photos }: { photos: TPhotos }) {
+  const definedPhotos = definePhotos(photos)
+
+  return (
+    <MasonryPhotoAlbum
+      photos={definedPhotos}
+      breakpoints={[640, 768, 1024]}
+      columns={(cW) => (cW < 640 ? 2 : cW < 768 ? 3 : 4)}
+      render={{ link: (props) => <Link {...props} scroll={false} /> }}
+    />
+  )
 }
 
-export function Photo({ index, data: photo }: { index: number; data: TPhoto }) {
-  return (
-    <div key={index} className="relative">
-      <Link href={`/photo/${photo.slug ?? photo.id}`}>
-        <Image
-          src={photo.urls.small}
-          alt={`${photo.description}`}
-          width={photo.width}
-          height={photo.height}
-          style={{ backgroundColor: photo.color }}
-          className="w-full transition-opacity ease-in group-hover:opacity-75"
-        />
-      </Link>
-    </div>
-  )
+export function definePhotos(photos: TPhotos) {
+  return photos.map((photo) => ({
+    src: photo.urls.small,
+    title: photo.description,
+    alt: photo.alt_description,
+    width: photo.width,
+    height: photo.height,
+    href: `/photo/${photo.slug ?? photo.id}`,
+    color: photo.color,
+  }))
 }

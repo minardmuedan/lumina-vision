@@ -1,25 +1,45 @@
 import SearchInput from '@/components/search'
 import { Button } from '@/components/ui/button'
 import { getPhotos } from '@/lib/unsplash'
-import Image from 'next/image'
 import NoResult from '@/components/no-results'
-import { InfiniteScrollGallery } from '@/components/load-more'
+import { InfinitScrollPhotos } from '@/components/load-more'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import Link from 'next/link'
 
-export default async function GalleryPage() {
-  await new Promise((res) => setTimeout(res, 5000))
+export default async function GalleryPage({ searchParams }: { searchParams: { order_by: 'oldest' | 'popular' | 'latest' } }) {
+  // await new Promise((res) => setTimeout(res, 5000))
 
-  const photos = await getPhotos()
+  const photos = await getPhotos(undefined, searchParams.order_by)
+  const orderByNavLinks = [
+    { label: 'Latest', href: '/gallery' },
+    { label: 'Popularity', href: '/gallery?order_by=popular' },
+    { label: 'Oldest', href: '/gallery?order_by=oldest' },
+  ]
+
   return (
     <div className="space-y-5">
       <div className="flex gap-3">
         <SearchInput placeholder="Search for a photo..." className="w-full" />
-        <Button disabled={!photos}>
-          <p>Filter</p>
-          <Image src="/icons/filter.svg" alt="filter-icon" width={19} height={19} className="invert" />
-        </Button>
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button disabled={!photos} variant="outline">
+              <p>Filter</p>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {orderByNavLinks.map((navlink, i) => (
+              <DropdownMenuItem key={i} asChild>
+                <a href={navlink.href} className="text-sm">
+                  {navlink.label}
+                </a>
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
-      {photos ? <InfiniteScrollGallery initialPhotos={photos} /> : <NoResult msg="no photo found" />}
+      {photos ? <InfinitScrollPhotos initialPhotos={photos} orderBy={searchParams.order_by} /> : <NoResult msg="no photo found" />}
     </div>
   )
 }

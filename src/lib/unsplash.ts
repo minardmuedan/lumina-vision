@@ -3,8 +3,9 @@ import { TCollection, TCollections } from '@/schema/collection'
 import { TFullPhoto, TPhotos, TRelatedPhotos } from '@/schema/photo'
 import { TFullUser } from '@/schema/user'
 
-export async function getPhotos(page = 1, order_by: 'oldest' | 'popular' | 'latest' = 'latest') {
-  const photos = await unsplashFetch<TPhotos>(`/photos?page=${page}&order_by=${order_by}`)
+export async function getPhotos(page = 1, order_by?: 'oldest' | 'popular' | 'latest') {
+  const orderBy = order_by === 'oldest' ? 'oldest' : order_by === 'popular' ? 'popular' : 'latest'
+  const photos = await unsplashFetch<TPhotos>(`/photos?page=${page}&order_by=${orderBy}`)
   return photos
 }
 

@@ -2,7 +2,7 @@ import 'server-only'
 import { CookieAttributes, generateIdFromEntropySize } from 'lucia'
 import { cookies, headers } from 'next/headers'
 import { alphabet, generateRandomString } from 'oslo/crypto'
-import { hash, verify } from '@node-rs/argon2'
+import { hash, compare } from 'bcrypt'
 
 export function getIpAddress() {
   const forwardedFor = headers().get('x-forwarded-for')
@@ -18,19 +18,13 @@ export function generateCode() {
   return generateRandomString(6, alphabet('0-9'))
 }
 
-const passwordOptions = {
-  memoryCost: 19456,
-  timeCost: 2,
-  outputLen: 32,
-  parallelism: 1,
-}
-
 export async function hashPassword(password: string) {
-  return await hash(password, passwordOptions)
+  const saltRounds = 10
+  return await hash(password, saltRounds)
 }
 
 export async function verifyPassword(hashedPassword: string, password: string) {
-  return await verify(hashedPassword, password, passwordOptions)
+  return await compare(hashedPassword, password)
 }
 
 export function setCookie(key: string, value: string, attr: CookieAttributes) {

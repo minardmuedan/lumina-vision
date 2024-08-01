@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { RemoveScroll } from 'react-remove-scroll'
 
 export function Navlinks() {
   const navlinks = ['/', '/gallery', '/collections', '/topics']
@@ -21,3 +22,5 @@ export function Navlinks() {
     </nav>
   )
 }
+
+export const NoScroll = RemoveScroll

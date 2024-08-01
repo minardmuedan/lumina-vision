@@ -1,10 +1,10 @@
 import { Suspense } from 'react'
-import { GalleryLoadingFallback } from './loading'
+import GalleryWithNavLoadingFallback from './loading'
 
 export default function GalleryLayout({ children }: { children: React.ReactNode }) {
   return (
     <section className="container min-h-dvhMinusNav w-full py-5">
-      <Suspense fallback={<GalleryLoadingFallback />}>{children}</Suspense>
+      <Suspense fallback={<GalleryWithNavLoadingFallback />}>{children}</Suspense>
     </section>
   )
 }

@@ -1,4 +1,5 @@
 import BackButton from '@/components/back-btn'
+import NoResult from '@/components/no-results'
 import Header from '@/components/page-header'
 import Tags from '@/components/tags'
 import { getCollectionDetails } from '@/lib/unsplash'
@@ -10,7 +11,12 @@ export default async function CollectionDetailsPage({ params }: { params: { id: 
   const collection = await getCollectionDetails(params.id)
   // await new Promise((res) => setTimeout(res, 5000))
 
-  if (!collection) return <p>failed to get collection</p>
+  if (!collection)
+    return (
+      <div className="py-5">
+        <NoResult msg="Failed to get collection" />
+      </div>
+    )
 
   return (
     <>

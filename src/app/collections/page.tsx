@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default async function CollectionsPage() {
+  await new Promise((res) => setTimeout(res, 5000))
   const collections = await getCollections()
 
   return (

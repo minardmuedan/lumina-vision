@@ -79,7 +79,7 @@ export default function CreateAccountForm() {
         <div className="space-y-2">
           <ErrorMessage actionResult={actionResult} />
 
-          <Button type="submit" disabled={(actionResult != undefined || isDisable) ?? timeLeft > 0 ?? form.formState.isSubmitting} className="w-full">
+          <Button type="submit" disabled={timeLeft > 0 ?? (actionResult != undefined || isDisable) ?? form.formState.isSubmitting} className="w-full">
             {timeLeft > 0 ? (
               `Wait ${timeLeft} seconds before submitting again`
             ) : form.formState.isSubmitting ? (

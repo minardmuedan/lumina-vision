@@ -1,47 +1,53 @@
 'use client'
 
 import { TPhotos } from '@/schema/photo'
-import { useEffect, useState } from 'react'
-import Loader from './loader'
-import { useInView } from 'react-intersection-observer'
-import NoResult from './no-results'
+import { UnstableInfiniteScroll as InfiniteScroll } from 'react-photo-album/scroll'
+import { definePhotos } from './masonry'
+import { MasonryPhotoAlbum } from 'react-photo-album'
+import Link from 'next/link'
 import getMorePhotosAction from '@/action/getMorePhotos'
-import dynamic from 'next/dynamic'
-
-const GalleryMasonry = dynamic(() => import('@/components/masonry'), {
-  ssr: false,
-})
+import 'react-photo-album/masonry.css'
+import { useState } from 'react'
+import NoResult from './no-results'
+import Loader from './loader'
 
 let page = 2
-export function InfiniteScrollGallery({ initialPhotos }: { initialPhotos: TPhotos }) {
-  const [photos, setPhotos] = useState(initialPhotos)
+export function InfinitScrollPhotos({ initialPhotos, orderBy }: { initialPhotos: TPhotos; orderBy?: 'oldest' | 'popular' | 'latest' }) {
   const [noMoreResult, setNoMoreResult] = useState(false)
 
-  async function fetchMore() {
-    const newPhotos = await getMorePhotosAction(page)
-    if (!!!newPhotos) return setNoMoreResult(true)
+  const definedInitialPhotos = definePhotos(initialPhotos)
+  async function fetchMorePhotos() {
+    if (noMoreResult) return null
 
-    setPhotos((prevPhotos) => [...prevPhotos, ...newPhotos])
+    const newPhotos = await getMorePhotosAction(page, orderBy)
+    if (!newPhotos) {
+      setNoMoreResult(true)
+      return null
+    }
+
+    const definedNewPhotos = definePhotos(newPhotos)
     page += 1
+    return definedNewPhotos
   }
 
   return (
-    <div className="space-y-5">
-      <GalleryMasonry photos={photos} />
-      {!noMoreResult ? <Tracker fetchMoreFn={fetchMore} /> : <NoResult msg="No More Photos" />}
-    </div>
-  )
-}
+    <>
+      <InfiniteScroll singleton photos={definedInitialPhotos} fetch={fetchMorePhotos}>
+        <MasonryPhotoAlbum
+          photos={[]}
+          breakpoints={[640, 768, 1024]}
+          columns={(cW) => (cW < 640 ? 2 : cW < 768 ? 3 : 4)}
+          render={{ link: (props) => <Link {...props} scroll={false} /> }}
+        />
+      </InfiniteScroll>
 
-function Tracker({ fetchMoreFn }: { fetchMoreFn: () => Promise<void> }) {
-  const { ref, inView } = useInView({ rootMargin: '0% 0% 50% 0%' })
-  useEffect(() => {
-    if (inView) fetchMoreFn()
-  }, [inView])
-
-  return (
-    <div ref={ref} className="flex w-full justify-center py-20">
-      <Loader />
-    </div>
+      {noMoreResult ? (
+        <NoResult msg={`That's all the photos we have for now`} />
+      ) : (
+        <div className="flex w-full justify-center py-10">
+          <Loader />
+        </div>
+      )}
+    </>
   )
 }
