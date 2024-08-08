@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const errorCause = z.enum(['invalid', 'incorrect', 'expired', 'limit', 'not_found', 'server_error', 'already_exist'])
+const errorCause = z.enum(['invalid', 'incorrect', 'expired', 'unauthorized', 'limit', 'not_found', 'server_error', 'already_exist'])
 
 const signUpAuthTokenSession = z.object({
   tokenId: z.string(),

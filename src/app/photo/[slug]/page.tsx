@@ -1,12 +1,10 @@
 import BackButton from '@/components/back-btn'
-import PhotoDetails from '@/components/photo-details-shared-components'
-import SearchInput from '@/components/search'
+import PhotoDetails from '@/components/photo/photo-details'
+import SearchInput from '@/components/search-input'
 import { getPhoto } from '@/lib/unsplash'
 
 export default async function PhotoDetailsPage({ params }: { params: { slug: string } }) {
   const photo = await getPhoto(params.slug)
-  await new Promise((res) => setTimeout(res, 5000))
-
   if (!photo) return <p>no photo</p>
   return (
     <>

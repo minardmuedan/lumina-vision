@@ -1,4 +1,5 @@
-import { pgTable, text, timestamp, pgEnum, boolean } from 'drizzle-orm/pg-core'
+import { TPhoto } from '@/schema/photo'
+import { pgTable, text, timestamp, pgEnum, boolean, json } from 'drizzle-orm/pg-core'
 
 export const providerEnum = pgEnum('provider', ['credentials', 'google', 'github'])
 
@@ -34,4 +35,24 @@ export const tokenTable = pgTable('token', {
   purpose: tokenPurposeEnum('purpose').notNull(),
   createdAt: timestamp('created_at', { mode: 'date', withTimezone: true }).defaultNow().notNull(),
   updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true }).defaultNow().notNull(),
+})
+
+export const albumTable = pgTable('album', {
+  id: text('id').primaryKey(),
+  addedBy: text('added_by')
+    .notNull()
+    .references(() => userTable.id),
+  title: text('title').notNull(),
+  description: text('description'),
+  createdAt: timestamp('created_at', { mode: 'date', withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp('updated_at', { mode: 'date', withTimezone: true }).defaultNow().notNull(),
+})
+
+export const photoTable = pgTable('photo_table', {
+  id: text('id').primaryKey(),
+  albumId: text('album_id')
+    .notNull()
+    .references(() => albumTable.id, { onDelete: 'cascade' }),
+  photo: json('photo').$type<TPhoto>(),
+  addedAt: timestamp('created_at', { mode: 'date', withTimezone: true }).defaultNow().notNull(),
 })

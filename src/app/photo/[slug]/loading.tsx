@@ -1,8 +1,9 @@
 import BackButton from '@/components/back-btn'
-import SearchInput from '@/components/search'
+import SearchInput from '@/components/search-input'
 import { TagsLoadingFallback } from '@/components/tags'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
+import { EllipsisVerticalIcon } from 'lucide-react'
 import Image from 'next/image'
 export default function PhotoDetailsLoadingFallback() {
   return (
@@ -17,17 +18,23 @@ export default function PhotoDetailsLoadingFallback() {
 export function PhotoDetailsLoadingFallbackWithoutSearch() {
   return (
     <>
-      <div className="mx-auto">
+      <div className="loading-page mx-auto">
         <header className="mb-3 flex items-center justify-between gap-2">
           <div className="user flex items-center gap-2">
             <Skeleton className="size-8" />
             <Skeleton className="h-6 w-24" />
           </div>
 
-          <Button disabled>
-            <p>Download</p>
-            <Image src="/icons/download.svg" alt="download-icon" width={19} height={19} className="invert" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" disabled>
+              <p>Download</p>
+              <Image src="/icons/download.svg" alt="download-icon" width={19} height={19} />
+            </Button>
+
+            <Button size="icon" aria-label="menu-btn" disabled>
+              <EllipsisVerticalIcon size={19} />
+            </Button>
+          </div>
         </header>
         <Skeleton className="mb-5 aspect-square w-full lg:max-h-[100dvh]" />
       </div>

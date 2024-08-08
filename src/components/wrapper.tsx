@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/lib/utils'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Button } from './ui/button'
 import Image from 'next/image'
 import { NoScroll } from './client-sub-component'
@@ -12,9 +12,12 @@ export function GridWrapperUl({ children, className }: { children: React.ReactNo
 
 export function ModalWrapper({ children }: { children: React.ReactNode }) {
   const router = useRouter()
+  const pathname = usePathname()
+  if (!pathname.startsWith('/photo/')) return null
+
   return (
-    <NoScroll noIsolation>
-      <div onClick={() => router.back()} className="fixed inset-0 z-50 w-full overflow-y-auto bg-black/10 pt-[30dvh] backdrop-blur-md">
+    <NoScroll>
+      <div onClick={() => router.back()} className="fixed inset-0 z-50 w-full overflow-y-auto bg-black/50 pt-[30dvh] backdrop-blur-md">
         <div onClick={(e) => e.stopPropagation()} className="modal container relative mx-auto w-full bg-background p-20 px-3 md:px-8 lg:px-20">
           <Button size="icon" variant="ghost" aria-label="close-modal" onClick={() => router.back()} className="absolute right-1 top-1">
             <Image src="/icons/close.svg" alt="close-icon" width={19} height={19} />

@@ -21,6 +21,12 @@ export type TPhoto = TPreviewPhoto & {
   likes: number
 }
 
+export type TSearchPhotos = {
+  total: number
+  total_pages: number
+  results: TPhotos
+}
+
 export type TRelatedPhotos = {
   total: number
   results: TPhoto[]

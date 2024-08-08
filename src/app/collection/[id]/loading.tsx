@@ -1,11 +1,10 @@
-import { GalleryLoadingFallback } from '@/app/gallery/loading'
 import BackButton from '@/components/back-btn'
 import { TagsLoadingFallback } from '@/components/tags'
 import { Skeleton } from '@/components/ui/skeleton'
 
 export default function CollectionDetailsLoadingFallback() {
   return (
-    <section className="max-h-dvhMinusNav overflow-hidden pt-2">
+    <section className="loading-page pt-2">
       <BackButton disabled variant="ghost" className="mb-2" />
       <div className="mb-14 flex flex-col-reverse gap-1 p-1 lg:flex-row">
         <div className="flex max-w-fit flex-1 flex-col items-center justify-center md:items-start">

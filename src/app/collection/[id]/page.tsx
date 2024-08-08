@@ -9,18 +9,18 @@ import Link from 'next/link'
 
 export default async function CollectionDetailsPage({ params }: { params: { id: string } }) {
   const collection = await getCollectionDetails(params.id)
-  // await new Promise((res) => setTimeout(res, 5000))
 
   if (!collection)
     return (
-      <div className="py-5">
+      <section>
+        <BackButton variant="ghost" className="mb-2" />
         <NoResult msg="Failed to get collection" />
-      </div>
+      </section>
     )
 
   return (
     <>
-      <section className="mb-14 pt-2">
+      <section className="mb-14">
         <BackButton variant="ghost" className="mb-2" />
         <div className="flex flex-col-reverse gap-1 p-1 lg:flex-row">
           <div className="flex w-full max-w-[700px] flex-col items-center justify-center md:items-start">
@@ -52,9 +52,9 @@ export default async function CollectionDetailsPage({ params }: { params: { id: 
 
 function User({ user }: { user: TUser }) {
   return (
-    <Link href={`/user/${user.username}`}>
+    <Link href={`/user/${user.username}`} className="underline-offset-2 hover:underline">
       <div className="mb-4 flex items-center gap-2">
-        <Image src={user.profile_image.medium} alt="profile-pic" width={36} height={36} />
+        <Image src={user.profile_image.medium} alt="profile-pic" width={28} height={28} />
         <p className="text-sm text-muted-foreground">{user.username}</p>
       </div>
     </Link>

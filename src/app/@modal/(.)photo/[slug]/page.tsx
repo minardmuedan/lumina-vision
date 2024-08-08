@@ -1,4 +1,4 @@
-import PhotoDetails from '@/components/photo-details-shared-components'
+import PhotoDetails from '@/components/photo/photo-details'
 import { getPhoto } from '@/lib/unsplash'
 
 export default async function ModalPhotoDetailsPage({ params }: { params: { slug: string } }) {

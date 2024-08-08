@@ -69,4 +69,7 @@
   main {
     @apply flex min-h-dvhMinusNav flex-col items-center justify-center px-5 md:px-10;
   }
+  body:has(.loading-page) {
+    @apply overflow-hidden;
+  }
 }

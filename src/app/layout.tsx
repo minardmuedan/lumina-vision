@@ -5,7 +5,7 @@ import Navbar from '@/components/navbar'
 import { Toaster } from '@/components/ui/sonner'
 import localFont from 'next/font/local'
 
-const mainFont = Bricolage_Grotesque({ subsets: ['latin'], weight: ['300', '400'] })
+const mainFont = Bricolage_Grotesque({ subsets: ['latin'], weight: ['300', '400', '500'] })
 const calstavier = localFont({ src: '/Calstavier.ttf', variable: '--font-calstavier' })
 
 export const metadata: Metadata = {
@@ -19,8 +19,8 @@ export default function RootLayout({ children, modal }: Readonly<{ children: Rea
       <body className={`${mainFont.className} ${calstavier.variable}`}>
         <Toaster richColors position="top-right" closeButton />
         <Navbar />
-        <main>{children}</main>
         {modal}
+        <main>{children}</main>
       </body>
     </html>
   )

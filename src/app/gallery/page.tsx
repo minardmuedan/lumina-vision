@@ -1,45 +1,28 @@
-import SearchInput from '@/components/search'
-import { Button } from '@/components/ui/button'
+import SearchInput from '@/components/search-input'
 import { getPhotos } from '@/lib/unsplash'
 import NoResult from '@/components/no-results'
-import { InfinitScrollPhotos } from '@/components/load-more'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
-import Link from 'next/link'
+import dynamic from 'next/dynamic'
+import OrderByFilterBtn from '@/components/photo/gallery-filter'
+
+const InfiniteScrollGallery = dynamic(() => import('@/components/photo/infinite-scroll-gallery'), { ssr: false })
 
 export default async function GalleryPage({ searchParams }: { searchParams: { order_by: 'oldest' | 'popular' | 'latest' } }) {
-  // await new Promise((res) => setTimeout(res, 5000))
+  const orderBy = searchParams.order_by === 'oldest' ? 'oldest' : searchParams.order_by === 'popular' ? 'popular' : 'latest'
+  const photos = await getPhotos(undefined, orderBy)
 
-  const photos = await getPhotos(undefined, searchParams.order_by)
-  const orderByNavLinks = [
-    { label: 'Latest', href: '/gallery' },
-    { label: 'Popularity', href: '/gallery?order_by=popular' },
-    { label: 'Oldest', href: '/gallery?order_by=oldest' },
-  ]
+  async function fetchMoreFn(page: number) {
+    'use server'
+    return await getPhotos(page, orderBy)
+  }
 
   return (
-    <div className="space-y-5">
+    <>
       <div className="flex gap-3">
         <SearchInput placeholder="Search for a photo..." className="w-full" />
-
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button disabled={!photos} variant="outline">
-              <p>Filter</p>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {orderByNavLinks.map((navlink, i) => (
-              <DropdownMenuItem key={i} asChild>
-                <a href={navlink.href} className="text-sm">
-                  {navlink.label}
-                </a>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <OrderByFilterBtn currentSearchParams={orderBy} />
       </div>
 
-      {photos ? <InfinitScrollPhotos initialPhotos={photos} orderBy={searchParams.order_by} /> : <NoResult msg="no photo found" />}
-    </div>
+      {photos ? <InfiniteScrollGallery initialPhotos={photos} fetchMoreFn={fetchMoreFn} /> : <NoResult msg="no photo found" />}
+    </>
   )
 }

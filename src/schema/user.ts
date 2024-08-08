@@ -35,6 +35,12 @@ export type TFullUser = TUser & {
   downloads: number
 }
 
+export type TSearchUser = {
+  total: number
+  total_pages: number
+  results: TUser[]
+}
+
 export type TUserLinks = {
   self: string
   html: string

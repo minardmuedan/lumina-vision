@@ -18,6 +18,12 @@ export type TCollection = {
   preview_photos: TPreviewPhoto[]
 }
 
+export type TSearchCollections = {
+  total: number
+  total_pages: number
+  results: TCollections
+}
+
 export type TCollectionLinks = {
   self: string
   html: string
