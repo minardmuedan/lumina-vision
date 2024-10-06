@@ -1,12 +1,10 @@
-import { TPreviewPhoto } from './photo'
+import { TUnsplashPreviewPhoto } from './photo'
 import { TTag } from '.'
 
-export type TUser = {
+export type TUnsplashUser = {
   id: string
   username: string
   name: string
-  first_name: string
-  last_name: string
   twitter_username: string | null
   portfolio_url: string
   bio: string
@@ -24,8 +22,8 @@ export type TUser = {
   social: TSocial
 }
 
-export type TFullUser = TUser & {
-  photos: TPreviewPhoto[]
+export type TFullUser = TUnsplashUser & {
+  photos: TUnsplashPreviewPhoto[]
   tags: {
     custom: TTag[]
     aggregated: TTag[]
@@ -38,7 +36,7 @@ export type TFullUser = TUser & {
 export type TSearchUser = {
   total: number
   total_pages: number
-  results: TUser[]
+  results: TUnsplashUser[]
 }
 
 export type TUserLinks = {

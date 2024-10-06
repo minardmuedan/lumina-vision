@@ -1,12 +1,13 @@
 'use client'
 
 import { fetcher } from '@/lib/client-fetcher'
-import { TPhoto } from '@/lib/unsplash/schema/transformedType'
+
 import { useInfiniteQuery } from '@tanstack/react-query'
 import 'react-photo-album/masonry.css'
 import { UnstableInfiniteScroll as InfiniteScroll } from 'react-photo-album/scroll'
 import { InfiniteScrollLoader, InfiniteScrollError } from '../ui/infinite-scroll'
 import GalleryMasonry from './masonry'
+import { TPhoto } from '@/lib/transformed-unsplash/_types'
 
 export default function InfiniteScrollGallery({ initialPhotos }: { initialPhotos: TPhoto[] }) {
   const { data, fetchNextPage, isFetchingNextPage, isError, error } = useInfiniteQuery({
@@ -26,7 +27,6 @@ export default function InfiniteScrollGallery({ initialPhotos }: { initialPhotos
       <InfiniteScroll
         singleton
         photos={data}
-        loading={<InfiniteScrollLoader />}
         fetch={async () => {
           const { data } = await fetchNextPage({ throwOnError: true })
           if (data) return data
@@ -36,6 +36,7 @@ export default function InfiniteScrollGallery({ initialPhotos }: { initialPhotos
         <GalleryMasonry photos={[]} />
       </InfiniteScroll>
 
+      {!isError && <InfiniteScrollLoader />}
       {isError && !isFetchingNextPage && <InfiniteScrollError message={error.message} refetch={() => fetchNextPage()} />}
     </>
   )

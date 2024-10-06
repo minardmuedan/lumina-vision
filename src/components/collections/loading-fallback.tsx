@@ -1,12 +1,16 @@
 import { Skeleton } from '../ui/skeleton'
-import { CollectionsContainerUl } from './components'
+import { CollectionsContainer } from './components'
 
-export default function CollectionsLoadingFallback({ count }: { count: number }) {
+export default function CollectionsLoadingFallback({ count, className }: { count: number; className?: string }) {
   return (
-    <CollectionsContainerUl>
+    <CollectionsContainer className={className}>
       {Array.from({ length: count }).map((_, i) => (
-        <Skeleton key={i} className='aspect-[10/6]' />
+        <IndividualCollectionLoadingFallback key={i} />
       ))}
-    </CollectionsContainerUl>
+    </CollectionsContainer>
   )
+}
+
+export function IndividualCollectionLoadingFallback({ className }: { className?: string }) {
+  return <Skeleton className={`aspect-[10/6] ${className}`} />
 }

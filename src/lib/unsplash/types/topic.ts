@@ -1,5 +1,5 @@
-import { TUnsplashPhoto, TPreviewPhoto } from './photo'
-import { TUser } from './user'
+import { TUnsplashPhoto, TUnsplashPreviewPhoto } from './photo'
+import { TUnsplashUser } from './user'
 
 export type TTopics = TTopic[]
 
@@ -18,11 +18,11 @@ export type TTopic = {
     html: string
     photos: string
   }
-  owners: TUser[]
+  owners: TUnsplashUser[]
   cover_photo: TUnsplashPhoto
-  preview_photos: TPreviewPhoto[]
+  preview_photos: TUnsplashPreviewPhoto[]
 }
 
 export type TFullTopic = TTopic & {
-  top_contributors: TUser[]
+  top_contributors: TUnsplashUser[]
 }

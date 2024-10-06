@@ -1,6 +1,6 @@
-import { TUnsplashPhoto, TPreviewPhoto } from './photo'
+import { TUnsplashPhoto, TUnsplashPreviewPhoto } from './photo'
 import { TTag } from '.'
-import { TUser } from './user'
+import { TUnsplashUser } from './user'
 
 export type TUnsplashCollection = {
   id: string
@@ -12,9 +12,9 @@ export type TUnsplashCollection = {
   total_photos: number
   tags: TTag[]
   links: TCollectionLinks
-  user: TUser
+  user: TUnsplashUser
   cover_photo: TUnsplashPhoto
-  preview_photos: TPreviewPhoto[]
+  preview_photos: TUnsplashPreviewPhoto[]
 }
 
 export type TSearchCollections = {

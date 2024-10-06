@@ -1,7 +1,7 @@
 'use client'
 
-import { TCollection } from '@/lib/unsplash/schema/transformedType'
-import { CollectionsContainerUl, IndividualCollection } from './components'
+import { TCollection } from '@/lib/transformed-unsplash/_types'
+import { CollectionsContainer, IndividualCollection } from './components'
 import CollectionsLoadingFallback from './loading-fallback'
 import { InfiniteScrollLoader, InfiniteScrollError } from '../ui/infinite-scroll'
 import { useInView } from 'react-intersection-observer'
@@ -10,7 +10,7 @@ import { fetcher } from '@/lib/client-fetcher'
 import { useEffect } from 'react'
 
 export default function InfiniteScrollCollections({ initialCollections }: { initialCollections: TCollection[] }) {
-  const { ref, inView } = useInView({ rootMargin: '800px' })
+  const { ref, inView } = useInView({ rootMargin: '400px' })
 
   const {
     data: collections,
@@ -36,11 +36,11 @@ export default function InfiniteScrollCollections({ initialCollections }: { init
 
   return (
     <div>
-      <CollectionsContainerUl>
+      <CollectionsContainer>
         {collections.map(collection => (
           <IndividualCollection key={collection.id} collection={collection} />
         ))}
-      </CollectionsContainerUl>
+      </CollectionsContainer>
 
       {isError && !isFetchingNextPage && <InfiniteScrollError message={error.message} refetch={() => fetchNextPage()} />}
 
@@ -50,9 +50,9 @@ export default function InfiniteScrollCollections({ initialCollections }: { init
             load more
           </span>
           <CollectionsLoadingFallback count={12} />
+          <InfiniteScrollLoader />
         </>
       )}
-      {isFetchingNextPage && <InfiniteScrollLoader />}
     </div>
   )
 }

@@ -6,6 +6,7 @@ const config: Config = {
   theme: {
     extend: {
       minHeight: { dvhMinusNav: 'calc(100dvh - 3.5rem)' },
+      fontFamily: { calstavier: 'var(--font-calstavier)' },
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',

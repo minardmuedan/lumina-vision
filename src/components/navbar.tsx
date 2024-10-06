@@ -9,7 +9,7 @@ export default function Navbar() {
   const navlinks = ['/', '/gallery', '/collections', '/topics']
 
   return (
-    <header className='sticky top-0 z-50 flex h-14 w-full items-center justify-between border-b bg-background px-10'>
+    <header className='sticky top-0 z-30 flex h-14 w-full items-center justify-between border-b bg-background px-10'>
       <Link href='/'>Minard</Link>
 
       <div className='hidden items-center gap-20 lg:flex'>

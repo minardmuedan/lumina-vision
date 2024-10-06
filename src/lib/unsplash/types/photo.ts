@@ -1,23 +1,23 @@
 import { TUnsplashCollection } from './collection'
-import { TTag, TUrls } from '.'
-import { TUser } from './user'
+import { TTag } from '.'
+import { TUnsplashUser } from './user'
 
-export type TPreviewPhoto = {
+export type TUnsplashPreviewPhoto = {
   id: string
   slug: string
   blur_hash: string
   asset_type: 'photo'
-  urls: TUrls
+  urls: { raw: string }
 }
 
-export type TUnsplashPhoto = TPreviewPhoto & {
+export type TUnsplashPhoto = TUnsplashPreviewPhoto & {
   width: number
   height: number
   color: string
   description: string
   alt_description: string
   links: TPhotoLinks
-  user: TUser
+  user: TUnsplashUser
   likes: number
 }
 
@@ -32,7 +32,7 @@ export type TRelatedPhotos = {
   results: TUnsplashPhoto[]
 }
 
-export type TFullPhoto = TUnsplashPhoto & {
+export type TUnsplashFullPhoto = TUnsplashPhoto & {
   location: TPhotoLocation
   tags: TTag[]
   views: number

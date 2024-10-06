@@ -31,5 +31,4 @@ export async function unsplashFetch<T>(url: string) {
 403 - Forbidden	Missing permissions to perform request
 404 - Not Found	The requested resource doesn’t exist
 500, 503	Something went wrong on our end
-
 */
