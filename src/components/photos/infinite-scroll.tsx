@@ -9,10 +9,10 @@ import { InfiniteScrollLoader, InfiniteScrollError } from '../ui/infinite-scroll
 import GalleryMasonry from './masonry'
 import { TPhoto } from '@/lib/transformed-unsplash/_types'
 
-export default function InfiniteScrollGallery({ initialPhotos }: { initialPhotos: TPhoto[] }) {
+export default function InfiniteScrollGallery({ initialPhotos, apiEndpoint }: { initialPhotos: TPhoto[]; apiEndpoint: string }) {
   const { data, fetchNextPage, isFetchingNextPage, isError, error } = useInfiniteQuery({
     queryKey: ['photos'],
-    queryFn: ({ pageParam }) => fetcher<TPhoto[]>(`/unsplash/photos?page=${pageParam}`),
+    queryFn: ({ pageParam }) => fetcher<TPhoto[]>(`${apiEndpoint}?page=${pageParam}`),
     initialPageParam: 2,
     initialData: { pageParams: [1], pages: [initialPhotos] },
     getNextPageParam: (lastPage, _, lastPageParam) => {

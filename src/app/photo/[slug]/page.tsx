@@ -6,7 +6,6 @@ import { TCollection } from '@/lib/transformed-unsplash/_types'
 import { getPhoto } from '@/lib/unsplash/photos'
 
 export default async function PhotoDetailsPage({ params }: { params: { slug: string } }) {
-  await new Promise(res => setTimeout(res, 5000))
   const photo = await getPhoto(params.slug)
   const sizes = '(min-width: 640px) 37.5vw, calc(100vw - 16px)'
 

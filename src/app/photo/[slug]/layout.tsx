@@ -1,8 +1,9 @@
 import ErrorBoundary from '@/components/error-boundary'
+import { pagePadding } from '@/components/pages'
 
 export default function PhotoDetailsLayout({ children, relatedPhotos }: { children: React.ReactNode; relatedPhotos: React.ReactNode }) {
   return (
-    <div className='px-2 py-3 md:px-10 lg:px-20'>
+    <div className={pagePadding}>
       {children}
 
       <section>
