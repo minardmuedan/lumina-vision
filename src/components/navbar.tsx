@@ -3,6 +3,7 @@
 import { SearchIcon } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { Input } from './ui/input'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -21,9 +22,9 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className='flex h-9 w-80 items-center justify-between rounded-md border border-border bg-accent px-3 text-sm text-muted-foreground'>
-          Type here to find something new...
-          <SearchIcon size={16} className='stroke-1.5' />
+        <div className='relative'>
+          <Input id='searchInput' placeholder='Type here to find something new...' className='bg-accent pr-8' />
+          <SearchIcon size={16} className='stroke-1.5 absolute right-3 top-1/2 -translate-y-1/2' />
         </div>
       </div>
     </header>

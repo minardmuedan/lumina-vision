@@ -1,9 +1,13 @@
 import { CollectionsContainer, IndividualCollection } from '@/components/collections/components'
-import { Button } from '@/components/ui/button'
+import Icon from '@/components/icon'
+import { buttonVariants } from '@/components/ui/button'
 import Tags from '@/components/ui/tags'
 import UnsplashImage from '@/components/unsplash-image'
+import { User } from '@/components/users'
 import { TCollection } from '@/lib/transformed-unsplash/_types'
 import { getPhoto } from '@/lib/unsplash/photos'
+import { cn } from '@/lib/utils'
+import Link from 'next/link'
 
 export default async function PhotoDetailsPage({ params }: { params: { slug: string } }) {
   const photo = await getPhoto(params.slug)
@@ -12,9 +16,11 @@ export default async function PhotoDetailsPage({ params }: { params: { slug: str
   return (
     <>
       <div>
-        <header className='flex justify-between border'>
-          <div></div>
-          <Button>Download</Button>
+        <header className='flex justify-between'>
+          <User user={photo.user} />
+          <Link href={`${photo.downloadLink}`} className={cn(buttonVariants(), !photo.downloadLink ? 'pointer-events-none opacity-50' : '')} target='_blank'>
+            <p>Download</p> <Icon icon='download' white />
+          </Link>
         </header>
         <UnsplashImage {...photo} sizes={sizes} className='mx-auto my-3 w-full sm:max-h-dvh sm:w-auto sm:min-w-[300px]' />
         <Tags tags={photo.tags} />

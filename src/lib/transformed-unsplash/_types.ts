@@ -63,3 +63,7 @@ export type TUser = {
   forHire: boolean
   social: TSocial
 }
+
+export type TFullUser = TUser & {
+  tags: TTag[]
+}

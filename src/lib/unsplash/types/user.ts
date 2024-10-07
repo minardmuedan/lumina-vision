@@ -22,7 +22,7 @@ export type TUnsplashUser = {
   social: TSocial
 }
 
-export type TFullUser = TUnsplashUser & {
+export type TUnsplashFullUser = TUnsplashUser & {
   photos: TUnsplashPreviewPhoto[]
   tags: {
     custom: TTag[]

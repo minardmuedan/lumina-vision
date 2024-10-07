@@ -1,16 +1,21 @@
 import { CollectionsContainer } from '@/components/collections/components'
 import { IndividualCollectionLoadingFallback } from '@/components/collections/loading-fallback'
+import Icon from '@/components/icon'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { TagsLoadingFallback } from '@/components/ui/tags'
+import { UserLoadingFallback } from '@/components/users'
 
 export default function PhotoDetailsLoading() {
   return (
     <>
       <div>
-        <header className='flex justify-between border'>
-          <div></div>
-          <Button disabled>Download</Button>
+        <header className='flex justify-between'>
+          <UserLoadingFallback />
+          <Button disabled>
+            <p>Download</p>
+            <Icon icon='download' white />
+          </Button>
         </header>
         <Skeleton style={{ aspectRatio: 0.833333 / 1 }} className='mx-auto my-3 w-full sm:max-h-dvh sm:w-auto' />
         <TagsLoadingFallback count={5} />

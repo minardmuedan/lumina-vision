@@ -19,7 +19,7 @@ export default function GalleryMasonry({ photos }: { photos: TPhoto[] }) {
       render={{
         photo: (_, { photo, index }) => (
           <Link key={index} href={`/photo/${photo.slug}`} className='w-full'>
-            <UnsplashImage {...photo} sizes={sizes} />
+            <UnsplashImage {...photo} sizes={sizes} className='rounded-md' />
           </Link>
         ),
       }}

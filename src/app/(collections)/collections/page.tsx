@@ -7,7 +7,7 @@ export default async function CollectionsPage() {
 
   return (
     <div className={pagePadding}>
-      <InfiniteScrollCollections initialCollections={collections} />
+      <InfiniteScrollCollections initialCollections={collections} queryKey={['collections']} apiEndpoint='/unsplash/collections' />
     </div>
   )
 }

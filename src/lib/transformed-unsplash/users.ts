@@ -1,5 +1,6 @@
-import { TUnsplashUser } from '../unsplash/types/user'
-import { TUser } from './_types'
+import { TUnsplashFullUser, TUnsplashUser } from '../unsplash/types/user'
+import { TFullUser, TUser } from './_types'
+import { formatTags } from './tags'
 
 export const formatUser = (user: TUnsplashUser): TUser => ({
   id: user.id,
@@ -20,3 +21,8 @@ export const formatUser = (user: TUnsplashUser): TUser => ({
   totalIllustrations: user.total_likes,
   totalPromotedIllustrations: user.total_promoted_illustrations,
 })
+
+export const formatFullUser = (user: TUnsplashFullUser): TFullUser => {
+  const formattedUser = formatUser(user)
+  return { ...formattedUser, tags: formatTags(user.tags.custom) }
+}

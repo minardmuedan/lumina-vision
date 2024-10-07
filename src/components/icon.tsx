@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-type TIcons = 'loader' | 'return'
+type TIcons = 'loader' | 'return' | 'download' | 'close' | 'photos' | 'likes' | 'collections'
 
 type TIconProps = { icon: TIcons; size?: number; className?: string; white?: boolean }
 export default function Icon({ icon, size = 16, className, white }: TIconProps) {

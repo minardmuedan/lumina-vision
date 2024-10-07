@@ -2,12 +2,12 @@
 
 import { cn } from '../lib/utils'
 import Image, { ImageLoaderProps } from 'next/image'
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { Blurhash } from 'react-blurhash'
 
 type TImageSize = { fill?: false; height: number; width: number } | { fill: true }
 
-export default function UnsplashImage(props: TProps & TImageSize) {
+const UnsplashImage = memo((props: TProps & TImageSize) => {
   const [isImageLoaded, setIsImageLoaded] = useState(false)
 
   return (
@@ -28,7 +28,10 @@ export default function UnsplashImage(props: TProps & TImageSize) {
       />
     </div>
   )
-}
+})
+
+UnsplashImage.displayName = 'UnsplashImage'
+export default UnsplashImage
 
 export function unsplashImageLoader({ src, width, quality }: ImageLoaderProps) {
   const url = new URL(src)
