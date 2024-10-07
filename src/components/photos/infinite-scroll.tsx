@@ -8,10 +8,11 @@ import { UnstableInfiniteScroll as InfiniteScroll } from 'react-photo-album/scro
 import { InfiniteScrollLoader, InfiniteScrollError } from '../ui/infinite-scroll'
 import GalleryMasonry from './masonry'
 import { TPhoto } from '@/lib/transformed-unsplash/_types'
+import { memo } from 'react'
 
 type TProps = { initialPhotos: TPhoto[]; queryKey: QueryKey; apiEndpoint: string }
 
-export default function InfiniteScrollGallery({ initialPhotos, apiEndpoint, queryKey }: TProps) {
+const InfiniteScrollGallery = memo(({ initialPhotos, apiEndpoint, queryKey }: TProps) => {
   const { data, fetchNextPage, isFetchingNextPage, isError, error } = useInfiniteQuery({
     queryKey: queryKey,
     queryFn: ({ pageParam }) => fetcher<TPhoto[]>(`${apiEndpoint}?page=${pageParam}`),
@@ -49,4 +50,7 @@ export default function InfiniteScrollGallery({ initialPhotos, apiEndpoint, quer
       )}
     </>
   )
-}
+})
+
+InfiniteScrollGallery.displayName = 'InfiniteScrollGallery'
+export default InfiniteScrollGallery

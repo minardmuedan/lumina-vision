@@ -1,7 +1,7 @@
 import { Skeleton } from '../ui/skeleton'
 import { CollectionsContainer } from './components'
 
-export default function CollectionsLoadingFallback({ count, className }: { count: number; className?: string }) {
+export default function CollectionsLoadingFallback({ count = 12, className }: { count?: number; className?: string }) {
   return (
     <CollectionsContainer className={className}>
       {Array.from({ length: count }).map((_, i) => (

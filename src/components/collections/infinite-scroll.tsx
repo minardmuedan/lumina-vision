@@ -54,7 +54,7 @@ export default function InfiniteScrollCollections({ initialCollections, queryKey
 
       {isFetchingNextPage && (
         <>
-          <CollectionsLoadingFallback count={12} />
+          <CollectionsLoadingFallback />
           <InfiniteScrollLoader />
         </>
       )}

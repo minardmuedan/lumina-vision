@@ -39,7 +39,7 @@ export function UserNavbarLoadingFallback() {
     <nav className='flex items-center gap-1'>
       {navlinks.map((link, i) => (
         <Skeleton key={i} className={cn(buttonVariants({ variant: i == 0 ? 'default' : 'ghost' }), `${i == 0 ? '' : 'opacity-50'}`)}>
-          <Icon icon={link} white={i == 0} />
+          <Icon icon={link} white={i === 0} />
           <p className='first-letter:uppercase'>{link}</p>
         </Skeleton>
       ))}

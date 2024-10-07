@@ -1,5 +1,5 @@
 import CollectionsLoadingFallback from '@/components/collections/loading-fallback'
 
-export default function UserCollectionsLoading() {
+export default function SearchCollectionsLoading() {
   return <CollectionsLoadingFallback />
 }
