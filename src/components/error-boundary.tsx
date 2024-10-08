@@ -34,8 +34,8 @@ class ErrorBoundary extends Component<Props, State> {
     console.error('Error caught in ErrorBoundary:', error, errorInfo)
   }
 
-  resetErrorBoundary = () => {
-    this.setState({ hasError: false, error: null, digest: undefined })
+  reloadPage = () => {
+    window.location.reload() // Reloads the entire page
   }
 
   render() {
@@ -44,8 +44,8 @@ class ErrorBoundary extends Component<Props, State> {
     if (hasError && error) {
       return (
         <div className={cn('flex min-h-dvhMinusNav flex-col items-center justify-center', className)}>
-          <h2> {error.digest ? error.digest : 'Something went wrong'}</h2>
-          <Button onClick={this.resetErrorBoundary}>Try again</Button>
+          <h2>{error.message}</h2>
+          <Button onClick={this.reloadPage}>Try again</Button>
         </div>
       )
     }

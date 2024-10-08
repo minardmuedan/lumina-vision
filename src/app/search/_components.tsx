@@ -1,34 +1,29 @@
+'use client'
+
 import Icon from '@/components/icon'
-import { pagePadding } from '@/components/pages'
-import BackButton from '@/components/ui/back-button'
 import { buttonVariants } from '@/components/ui/button'
 import Link from 'next/link'
-import { Suspense } from 'react'
+import { usePathname, useSearchParams } from 'next/navigation'
 
-type TProps = { query: string | undefined; activePath: 'photos' | 'collections' | 'users' }
-
-export function SearchPageWrapper({ children, query, activePath }: TProps & { children: React.ReactNode }) {
+export function SearchQuery() {
+  const searchParams = useSearchParams()
   return (
-    <div className={pagePadding}>
-      <BackButton />
-
-      <div className='py-10'>
-        <p className='text-lg sm:text-2xl md:text-3xl'>
-          Search Result for <span className='font-normal'>{`"${query}"`}</span>
-        </p>
-      </div>
-      <SearchNavbar query={query} activePath={activePath} />
-
-      <Suspense>{children}</Suspense>
-    </div>
+    <p className='text-lg sm:text-2xl md:text-3xl'>
+      Search Result for <span className='font-normal'>{`"${searchParams.get('query')}"`}</span>
+    </p>
   )
 }
 
-export function SearchNavbar({ query, activePath }: TProps) {
+export function SearchNavbar() {
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+
+  const query = searchParams.get('query')
+
   return (
-    <nav className='flex gap-1'>
+    <nav className='mb-3 flex gap-1'>
       {(['photos', 'collections', 'users'] as const).map((link, i) => {
-        const isActive = activePath === link
+        const isActive = i == 0 ? pathname === `/search` : pathname.includes(`/${link}`)
         return (
           <Link key={i} href={`/search${i == 0 ? '' : `/${link}`}?query=${query}`} className={buttonVariants({ variant: isActive ? 'default' : 'ghost' })}>
             <Icon icon={link} white={isActive} />
@@ -37,5 +32,14 @@ export function SearchNavbar({ query, activePath }: TProps) {
         )
       })}
     </nav>
+  )
+}
+
+export function SearchNoResult() {
+  return (
+    <div className='flex h-[calc(100dvh-20rem)] flex-col items-center justify-center gap-2 text-center *:max-w-[700px]'>
+      <h1 className='font-calstavier text-3xl sm:text-4xl md:text-5xl'>Find What Matters to You</h1>
+      <p className='text-sm text-muted-foreground md:text-base'>Discover relevant results with a quick keyword search</p>
+    </div>
   )
 }

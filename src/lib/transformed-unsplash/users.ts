@@ -22,6 +22,8 @@ export const formatUser = (user: TUnsplashUser): TUser => ({
   totalPromotedIllustrations: user.total_promoted_illustrations,
 })
 
+export const formatUsers = (users: TUnsplashUser[]): TUser[] => users.map(user => formatUser(user))
+
 export const formatFullUser = (user: TUnsplashFullUser): TFullUser => {
   const formattedUser = formatUser(user)
   return { ...formattedUser, tags: formatTags(user.tags.custom) }

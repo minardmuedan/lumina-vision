@@ -1,12 +1,12 @@
-import { pagePadding } from '@/components/pages'
+import PageWrapper from '@/components/pages'
 import InfiniteScrollGallery from '@/components/photos/infinite-scroll'
 import { getPhotos } from '@/lib/unsplash/photos'
 
 export default async function GalleryPage() {
   const photos = await getPhotos(1)
   return (
-    <div className={pagePadding}>
+    <PageWrapper>
       <InfiniteScrollGallery initialPhotos={photos} queryKey={['gallery']} apiEndpoint='/unsplash/photos' />
-    </div>
+    </PageWrapper>
   )
 }

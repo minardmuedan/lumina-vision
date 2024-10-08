@@ -9,6 +9,7 @@ export async function fetcher<T>(url: string) {
     return data
   } catch (err) {
     if (err instanceof Error) throw err
+    if (typeof err === 'string') throw new Error(err)
     throw new Error('Something went wrong fetching the data')
   }
 }

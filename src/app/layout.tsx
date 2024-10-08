@@ -5,6 +5,7 @@ import './globals.css'
 import Navbar from '@/components/navbar'
 import ReactQueryProvider from '@/components/provider'
 import ErrorBoundary from '@/components/error-boundary'
+import Footer from '@/components/footer'
 
 const bricolageGrotesque = Bricolage_Grotesque({ subsets: ['latin'], weight: ['300', '400'] })
 const calstavier = localFont({ src: './Calstavier.ttf', variable: '--font-calstavier' })
@@ -21,6 +22,7 @@ export default function RootLayout({ children, modal }: TLayoutProps) {
           <main>
             <ErrorBoundary>{children}</ErrorBoundary>
           </main>
+          <Footer />
         </ReactQueryProvider>
       </body>
     </html>

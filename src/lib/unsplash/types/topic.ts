@@ -1,9 +1,7 @@
 import { TUnsplashPhoto, TUnsplashPreviewPhoto } from './photo'
 import { TUnsplashUser } from './user'
 
-export type TTopics = TTopic[]
-
-export type TTopic = {
+export type TUnsplashTopic = {
   id: string
   slug: string
   title: string
@@ -23,6 +21,6 @@ export type TTopic = {
   preview_photos: TUnsplashPreviewPhoto[]
 }
 
-export type TFullTopic = TTopic & {
+export type TUnsplashFullTopic = TUnsplashTopic & {
   top_contributors: TUnsplashUser[]
 }

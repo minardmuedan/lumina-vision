@@ -9,7 +9,12 @@ export default async function CollectionPhotos({ params }: { params: { id: strin
   return (
     <>
       <p className='mb-3 text-center text-sm text-muted-foreground'>{totalPhotos} photos</p>
-      <InfiniteScrollGallery initialPhotos={photos} queryKey={[`collection-${params.id}-photos`]} apiEndpoint={`/unsplash/collections/${params.id}/photos`} />
+      <InfiniteScrollGallery
+        initialPhotos={photos}
+        queryKey={[`collection-${params.id}-photos`]}
+        apiEndpoint={`/unsplash/collections/${params.id}/photos`}
+        max={totalPhotos}
+      />
 
       {photos.length < 9 && totalPhotos > 9 && (
         <div className='my-20 text-center'>

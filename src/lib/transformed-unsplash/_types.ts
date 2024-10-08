@@ -39,9 +39,11 @@ export type TCollection = {
   publishedAt: Date
   totalPhotos: number
   tags: TTag[]
-  user: TUser
   coverPhoto: TPhoto
-  previewPhotos: TPreviewPhoto[]
+}
+
+export type TFullCollection = TCollection & {
+  user: TUser
 }
 
 export type TUser = {
@@ -66,4 +68,19 @@ export type TUser = {
 
 export type TFullUser = TUser & {
   tags: TTag[]
+}
+
+export type TTopic = {
+  id: string
+  slug: string
+  title: string
+  description: string
+  totalPhotos: number
+  coverPhoto: TPhoto
+  previewPhotos: TPreviewPhoto[]
+}
+
+export type TFullTopic = TTopic & {
+  owners: TUser[]
+  topContributors: TUser[]
 }

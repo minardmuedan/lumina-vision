@@ -1,11 +1,24 @@
-import { SearchPageWrapper } from '../_components'
+import InfiniteScrollCollections from '@/components/collections/infinite-scroll'
+import { getSearchCollections } from '@/lib/unsplash/search'
+import { SearchNoResult } from '../_components'
 
-export default async function SearchCollectionsPage({ searchParams: { query } }: { searchParams: { query: string | undefined } }) {
+export default async function SearchCollectionsPage({ searchParams: { query } }: { searchParams: { query: string } }) {
   await new Promise(res => setTimeout(res, 5000))
 
+  const { total, collections } = await getSearchCollections(query, 1)
+
+  if (!collections.length) return <SearchNoResult />
+
   return (
-    <SearchPageWrapper query={query} activePath='collections'>
-      hello
-    </SearchPageWrapper>
+    <>
+      <p className='mb-2 text-center text-sm text-muted-foreground'>{total} collections</p>
+      <InfiniteScrollCollections
+        initialCollections={collections}
+        queryKey={[`search-${query}-collections`]}
+        apiEndpoint={`/unsplash/search/collections?query=${query}`}
+        hasSearchParams
+        max={total}
+      />
+    </>
   )
 }

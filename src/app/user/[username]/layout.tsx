@@ -13,7 +13,15 @@ export default async function UserDetailsLayout({ children, params }: { children
     <>
       <div className='mb-20 mt-10 flex flex-col items-center gap-10 text-center md:flex-row md:items-start md:text-start'>
         <div className='relative size-32'>
-          <Image src={user.profile_image.large} alt='profile' fill quality={100} sizes='32px' loader={unsplashImageLoader} className='bg-accent object-cover' />
+          <Image
+            src={user.profile_image.large}
+            alt='profile'
+            fill
+            quality={100}
+            sizes='32px'
+            loader={unsplashImageLoader}
+            className='w-full bg-accent object-cover'
+          />
         </div>
 
         <div className='max-w-[700px] flex-1'>

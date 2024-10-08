@@ -11,6 +11,9 @@ export const formatPreviewPhoto = (previewPhoto: TUnsplashPreviewPhoto): TPrevie
   src: previewPhoto.urls?.raw,
 })
 
+export const formatPreviewPhotos = (previewPhotos: TUnsplashPreviewPhoto[]): TPreviewPhoto[] =>
+  previewPhotos.map(previewPhotos => formatPreviewPhoto(previewPhotos))
+
 export const formatPhoto = (photo: TUnsplashPhoto): TPhoto => ({
   id: photo.id,
   slug: photo.slug,

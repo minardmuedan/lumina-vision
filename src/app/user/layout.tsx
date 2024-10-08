@@ -1,11 +1,12 @@
-import { pagePadding } from '@/components/pages'
+import PageWrapper from '@/components/pages'
 import BackButton from '@/components/ui/back-button'
+import { Suspense } from 'react'
 
 export default function UserLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className={pagePadding}>
+    <PageWrapper>
       <BackButton />
-      {children}
-    </div>
+      <Suspense>{children}</Suspense>
+    </PageWrapper>
   )
 }

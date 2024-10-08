@@ -1,10 +1,10 @@
 import CollectionsLoadingFallback from '@/components/collections/loading-fallback'
-import { pagePadding } from '@/components/pages'
+import PageWrapper from '@/components/pages'
 
 export default function CollectionsLoading() {
   return (
-    <div className={pagePadding}>
+    <PageWrapper>
       <CollectionsLoadingFallback />
-    </div>
+    </PageWrapper>
   )
 }

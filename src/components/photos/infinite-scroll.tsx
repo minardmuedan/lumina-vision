@@ -10,15 +10,16 @@ import GalleryMasonry from './masonry'
 import { TPhoto } from '@/lib/transformed-unsplash/_types'
 import { memo } from 'react'
 
-type TProps = { initialPhotos: TPhoto[]; queryKey: QueryKey; apiEndpoint: string }
+type TProps = { initialPhotos: TPhoto[]; queryKey: QueryKey; apiEndpoint: string; hasSearchParams?: boolean; max?: number }
 
-const InfiniteScrollGallery = memo(({ initialPhotos, apiEndpoint, queryKey }: TProps) => {
-  const { data, fetchNextPage, isFetchingNextPage, isError, error } = useInfiniteQuery({
+const InfiniteScrollGallery = memo(({ initialPhotos, apiEndpoint, hasSearchParams, queryKey, max }: TProps) => {
+  const { data, hasNextPage, fetchNextPage, isFetchingNextPage, isError, error } = useInfiniteQuery({
     queryKey: queryKey,
-    queryFn: ({ pageParam }) => fetcher<TPhoto[]>(`${apiEndpoint}?page=${pageParam}`),
-    initialPageParam: 2,
+    queryFn: ({ pageParam }) => fetcher<TPhoto[]>(`${apiEndpoint}${hasSearchParams ? '&' : '?'}page=${pageParam}`),
     initialData: { pageParams: [1], pages: [initialPhotos] },
-    getNextPageParam: (lastPage, _, lastPageParam) => {
+    initialPageParam: 2,
+    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      if (max && allPages.length >= Math.ceil(max / 10)) return null
       if (lastPage.length < 10) return null
       return lastPageParam + 1
     },
@@ -32,15 +33,17 @@ const InfiniteScrollGallery = memo(({ initialPhotos, apiEndpoint, queryKey }: TP
         <>
           <InfiniteScroll
             singleton
-            photos={data.pages[0]}
+            photos={data.pages.flat()}
             fetch={async () => {
               const { data: newPages } = await fetchNextPage({ throwOnError: true })
+              if (!hasNextPage) return null
               if (!newPages?.pages.length) return null
 
               const newPhotos = newPages.pages[newPages.pageParams.length - 1]
               if (!newPhotos?.length) return null
               return newPhotos
             }}
+            finished={!hasNextPage}
           >
             <GalleryMasonry photos={[]} />
           </InfiniteScroll>

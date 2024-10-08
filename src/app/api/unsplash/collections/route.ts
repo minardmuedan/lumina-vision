@@ -1,11 +1,9 @@
 import { getCollections } from '@/lib/unsplash/collections'
-import { NextRequest } from 'next/server'
+import { apiHandler } from '../_handler'
 
-export async function GET(req: NextRequest) {
+export const GET = apiHandler(async req => {
   const { searchParams } = req.nextUrl
   const page = searchParams.get('page') ? Number(searchParams.get('page')) : 2
 
-  const photos = await getCollections(page).catch((err: Error) => err.message)
-
-  return Response.json(photos)
-}
+  return await getCollections(page)
+})

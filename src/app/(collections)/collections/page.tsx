@@ -1,13 +1,13 @@
 import InfiniteScrollCollections from '@/components/collections/infinite-scroll'
-import { pagePadding } from '@/components/pages'
+import PageWrapper from '@/components/pages'
 import { getCollections } from '@/lib/unsplash/collections'
 
 export default async function CollectionsPage() {
   const collections = await getCollections(1)
 
   return (
-    <div className={pagePadding}>
+    <PageWrapper>
       <InfiniteScrollCollections initialCollections={collections} queryKey={['collections']} apiEndpoint='/unsplash/collections' />
-    </div>
+    </PageWrapper>
   )
 }

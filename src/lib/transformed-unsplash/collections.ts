@@ -1,8 +1,8 @@
 import { TUnsplashCollection } from '../unsplash/types/collection'
-import { formatPhoto, formatPreviewPhoto } from './photos'
-import { TCollection } from './_types'
-import { formatUser } from './users'
+import { TCollection, TFullCollection } from './_types'
+import { formatPhoto } from './photos'
 import { formatTags } from './tags'
+import { formatUser } from './users'
 
 export const formatCollection = (collection: TUnsplashCollection): TCollection => ({
   id: collection.id,
@@ -10,11 +10,14 @@ export const formatCollection = (collection: TUnsplashCollection): TCollection =
   description: collection.description,
   blurHash: collection.blur_hash,
   coverPhoto: formatPhoto(collection.cover_photo),
-  previewPhotos: collection.preview_photos.map(previewPhoto => formatPreviewPhoto(previewPhoto)),
   publishedAt: collection.published_at,
   tags: formatTags(collection.tags),
   totalPhotos: collection.total_photos,
-  user: formatUser(collection.user),
 })
 
 export const formatCollections = (collections: TUnsplashCollection[]): TCollection[] => collections.map(collection => formatCollection(collection))
+
+export const formatFullCollection = (collection: TUnsplashCollection): TFullCollection => ({
+  ...formatCollection(collection),
+  user: formatUser(collection.user),
+})

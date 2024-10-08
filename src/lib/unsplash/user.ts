@@ -7,6 +7,7 @@ import { TUnsplashPhoto } from './types/photo'
 import { TUnsplashFullUser } from './types/user'
 
 export const getUser = async (username: string) => formatFullUser(await unsplashFetch<TUnsplashFullUser>(`/users/${username}`))
+
 export const getUserPhotos = async (username: string, page: number) =>
   formatPhotos(await unsplashFetch<TUnsplashPhoto[]>(`/users/${username}/photos?page=${page}`))
 

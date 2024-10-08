@@ -7,11 +7,11 @@ import { InfiniteScrollLoader, InfiniteScrollError } from '../ui/infinite-scroll
 import { useInView } from 'react-intersection-observer'
 import { QueryKey, useInfiniteQuery } from '@tanstack/react-query'
 import { fetcher } from '@/lib/client-fetcher'
-import { useEffect } from 'react'
+import { memo, useEffect } from 'react'
 
-type TProps = { initialCollections: TCollection[]; queryKey: QueryKey; apiEndpoint: string }
+type TProps = { initialCollections: TCollection[]; queryKey: QueryKey; apiEndpoint: string; hasSearchParams?: boolean; max?: number }
 
-export default function InfiniteScrollCollections({ initialCollections, queryKey, apiEndpoint }: TProps) {
+const InfiniteScrollCollections = memo(({ initialCollections, queryKey, apiEndpoint, hasSearchParams, max }: TProps) => {
   const { ref, inView } = useInView({ rootMargin: '400px' })
 
   const {
@@ -22,10 +22,11 @@ export default function InfiniteScrollCollections({ initialCollections, queryKey
     error,
   } = useInfiniteQuery({
     queryKey: queryKey,
-    queryFn: ({ pageParam }) => fetcher<TCollection[]>(`${apiEndpoint}?page=${pageParam}`),
+    queryFn: ({ pageParam }) => fetcher<TCollection[]>(`${apiEndpoint}${hasSearchParams ? '&' : '?'}page=${pageParam}`),
     initialData: { pageParams: [1], pages: [initialCollections] },
     initialPageParam: 2,
-    getNextPageParam: (lastPage, _aP, lastPageParam) => {
+    getNextPageParam: (lastPage, allPages, lastPageParam) => {
+      if (max && allPages.length >= Math.ceil(max / 12)) return null
       if (lastPage.length < 12) return null
       return lastPageParam + 1
     },
@@ -60,4 +61,7 @@ export default function InfiniteScrollCollections({ initialCollections, queryKey
       )}
     </div>
   )
-}
+})
+
+InfiniteScrollCollections.displayName = 'InfiniteScrollCollections'
+export default InfiniteScrollCollections
