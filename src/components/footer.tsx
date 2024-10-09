@@ -9,6 +9,13 @@ export default function Footer() {
     { icon: 'users', title: 'User / Photographer', description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit' },
   ] as const
 
+  const socmedLinks = [
+    { label: 'facebook', href: 'https://www.facebook.com/minard.parilla' },
+    { label: 'instagram', href: 'https://www.instagram.com/parilla_minard/' },
+    { label: 'twitter', href: '#' },
+    { label: 'pinterest', href: '#' },
+  ] as const
+
   return (
     <FooterWrapper>
       <footer className='flex w-full flex-col items-center gap-14 bg-accent px-3 py-10 md:px-10'>
@@ -43,10 +50,10 @@ export default function Footer() {
         <div className='flex w-full flex-col items-center justify-between gap-5 border-t pt-14 md:flex-row'>
           <p className='text-sm text-muted-foreground'>© 2024 · Minard Parilla | All rights reserved</p>
           <nav className='flex items-center gap-10'>
-            {(['facebook', 'instagram', 'twitter', 'pinterest'] as const).map((socmed, i) => (
-              <Link key={i} href=''>
-                <Icon icon={`socmed/${socmed}`} size={20} />
-                <span className='sr-only'> social media {socmed}</span>
+            {socmedLinks.map((socmed, i) => (
+              <Link key={i} href={socmed.href}>
+                <Icon icon={`socmed/${socmed.label}`} size={20} />
+                <span className='sr-only'> social media {socmed.label}</span>
               </Link>
             ))}
           </nav>

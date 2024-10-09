@@ -44,7 +44,7 @@ class ErrorBoundary extends Component<Props, State> {
     if (hasError && error) {
       return (
         <div className={cn('flex min-h-dvhMinusNav flex-col items-center justify-center', className)}>
-          <h2>{error.message}</h2>
+          <h2 className='mb-2 text-2xl'>Something went wrong</h2>
           <Button onClick={this.reloadPage}>Reload Page</Button>
         </div>
       )
