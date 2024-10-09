@@ -1,5 +1,12 @@
-export default async function SearchUsersPage({ searchParams: { query } }: { searchParams: { query: string | undefined } }) {
-  await new Promise(res => setTimeout(res, 5000))
+import InfiniteScrollSearchUsers from '@/components/users/infinite-scroll'
+import { getSearchUsers } from '@/lib/unsplash/search'
 
-  return <p>{query}</p>
+export default async function SearchUsersPage({ searchParams: { query } }: { searchParams: { query: string } }) {
+  const { total, users } = await getSearchUsers(query, 1)
+  return (
+    <>
+      <p className='mb-2 text-center text-sm text-muted-foreground'>{total} users</p>
+      <InfiniteScrollSearchUsers query={query} initialUsers={users} />
+    </>
+  )
 }

@@ -1,3 +1,5 @@
+import { UsersLoadingFallback } from '@/components/users/components'
+
 export default function SearchUsersloading() {
-  return <div>SearchUsersloading...</div>
+  return <UsersLoadingFallback />
 }

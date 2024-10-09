@@ -1,6 +1,6 @@
 import Tags from '@/components/ui/tags'
 import UnsplashImage from '@/components/unsplash-image'
-import { User } from '@/components/users'
+import { User } from '@/components/users/components'
 import { getCollection } from '@/lib/unsplash/collections'
 
 export default async function CollectionDetailsPage({ params }: { params: { id: string } }) {

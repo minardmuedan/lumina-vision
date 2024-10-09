@@ -3,8 +3,6 @@ import { getSearchCollections } from '@/lib/unsplash/search'
 import { SearchNoResult } from '../_components'
 
 export default async function SearchCollectionsPage({ searchParams: { query } }: { searchParams: { query: string } }) {
-  await new Promise(res => setTimeout(res, 5000))
-
   const { total, collections } = await getSearchCollections(query, 1)
 
   if (!collections.length) return <SearchNoResult />

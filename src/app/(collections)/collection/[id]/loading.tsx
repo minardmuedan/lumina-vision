@@ -1,6 +1,6 @@
 import { Skeleton } from '@/components/ui/skeleton'
 import { TagsLoadingFallback } from '@/components/ui/tags'
-import { UserLoadingFallback } from '@/components/users'
+import { UserLoadingFallback } from '@/components/users/components'
 
 export default function CollectionDetailsLoading() {
   return (

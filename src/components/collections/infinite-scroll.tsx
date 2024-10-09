@@ -40,8 +40,8 @@ const InfiniteScrollCollections = memo(({ initialCollections, queryKey, apiEndpo
   return (
     <div>
       <CollectionsContainer>
-        {collections.map(collection => (
-          <IndividualCollection key={collection.id} collection={collection} />
+        {collections.map((collection, i) => (
+          <IndividualCollection key={i} collection={collection} />
         ))}
       </CollectionsContainer>
 

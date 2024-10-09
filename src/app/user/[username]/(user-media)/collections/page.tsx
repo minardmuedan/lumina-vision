@@ -3,9 +3,8 @@ import { NoResult } from '@/components/ui/no-results'
 import { getUser, getUserCollections } from '@/lib/unsplash/user'
 
 export default async function UserCollections({ params: { username } }: { params: { username: string } }) {
-  const { totalCollections } = await getUser(username)
-  const collections = await getUserCollections(username, 1)
-  if (!collections.length) return <NoResult message={`User does'nt have collections`} />
+  const [{ totalCollections }, collections] = await Promise.all([getUser(username), getUserCollections(username, 1)])
+  if (!collections.length) return <NoResult message={`User doesn't have collections`} />
 
   return (
     <InfiniteScrollCollections

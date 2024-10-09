@@ -1,5 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton'
-import { UserLoadingFallback } from '@/components/users'
+import { UserLoadingFallback } from '@/components/users/components'
 
 export default function TopicDetailsLoading() {
   return (

@@ -8,7 +8,7 @@ import { usePathname, useSearchParams } from 'next/navigation'
 export function SearchQuery() {
   const searchParams = useSearchParams()
   return (
-    <p className='text-lg sm:text-2xl md:text-3xl'>
+    <p className='text-2xl md:text-3xl'>
       Search Result for <span className='font-normal'>{`"${searchParams.get('query')}"`}</span>
     </p>
   )

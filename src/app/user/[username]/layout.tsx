@@ -18,7 +18,7 @@ export default async function UserDetailsLayout({ children, params }: { children
             alt='profile'
             fill
             quality={100}
-            sizes='32px'
+            sizes='128px'
             loader={unsplashImageLoader}
             className='w-full bg-accent object-cover'
           />

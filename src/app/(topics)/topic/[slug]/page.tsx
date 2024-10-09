@@ -1,5 +1,5 @@
 import UnsplashImage from '@/components/unsplash-image'
-import { User } from '@/components/users'
+import { User } from '@/components/users/components'
 import { getTopic } from '@/lib/unsplash/topics'
 
 export default async function TopicDetailsPage({ params }: { params: { slug: string } }) {
