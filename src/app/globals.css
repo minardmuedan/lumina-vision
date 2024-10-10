@@ -37,7 +37,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background font-light text-foreground;
+    @apply overflow-x-hidden bg-background font-light text-foreground;
   }
   .underline {
     @apply underline-offset-2;
