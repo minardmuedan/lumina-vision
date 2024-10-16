@@ -41,7 +41,7 @@ export default function GalleryMasonry({ photos }: { photos: TPhoto[] }) {
               />
             </div>
 
-            <Link key={index} href={`/photo/${photo.slug}`} className='w-full'>
+            <Link key={index} href={`/photo/${photo.slug}`} className='w-full' prefetch={false}>
               <UnsplashImage {...photo} sizes={sizes} className='rounded-md' />
             </Link>
           </div>

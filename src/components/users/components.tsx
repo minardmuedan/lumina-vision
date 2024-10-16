@@ -28,7 +28,7 @@ export function UserLoadingFallback() {
 
 export function IndividualUser({ user }: { user: TUser }) {
   return (
-    <Link href={`/user/${user.username}`} className={cn(buttonVariants({ variant: 'outline' }), 'h-20 w-full items-start p-0')}>
+    <Link href={`/user/${user.username}`} className={cn(buttonVariants({ variant: 'outline' }), 'h-20 w-full items-start p-0')} prefetch={false}>
       <div className='relative aspect-square h-full'>
         <Image src={user.profile_image.large} alt='user profile' fill sizes='80px' loader={unsplashImageLoader} className='object-cover' />
       </div>

@@ -8,6 +8,7 @@ export default function IndividualTopic({ topic }: { topic: TTopic }) {
     <Link
       href={`/topic/${topic.slug}`}
       className='group relative flex aspect-[10/6] overflow-hidden rounded-lg rounded-bl-none transition-opacity ease-out *:flex-1 hover:opacity-75'
+      prefetch={false}
     >
       <div className='relative bg-accent'>
         <TopicImage photo={topic.previewPhotos[0]} />

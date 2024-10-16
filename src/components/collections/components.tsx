@@ -19,7 +19,7 @@ export function IndividualCollection({
   sizes = '(min-width: 1040px) calc(33.32vw - 58px), (min-width: 780px) calc(33.33vw - 32px), calc(50vw - 12px)',
 }: IndividualCollectionProps) {
   return (
-    <Link key={collection.id} href={`/collection/${collection.id}/`} className={className}>
+    <Link key={collection.id} href={`/collection/${collection.id}/`} className={className} prefetch={false}>
       <div className='group relative flex aspect-[10/6] items-center justify-center overflow-hidden rounded-lg bg-black p-1'>
         <UnsplashImage {...collection.coverPhoto} fill sizes={sizes} className='opacity-65' />
 
