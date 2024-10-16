@@ -4,14 +4,22 @@ import { EmblaCarouselType, EmblaEventType } from 'embla-carousel'
 
 import { Carousel, CarouselApi, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import UnsplashImage from '@/components/unsplash-image'
-import { imageSlides } from './_hero-images'
 import AutoScroll from 'embla-carousel-auto-scroll'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 const TWEEN_FACTOR_BASE = 0.4
 const numberWithinRange = (number: number, min: number, max: number): number => Math.min(Math.max(number, min), max)
 
-export function HeroSlidingImage() {
+export function HeroSlidingImage({
+  imageSlides,
+}: {
+  imageSlides: {
+    src: string
+    alt: string
+    color: string
+    blurHash: string
+  }[]
+}) {
   const [api, setApi] = useState<CarouselApi>()
   const tweenFactor = useRef(0)
 
@@ -55,15 +63,15 @@ export function HeroSlidingImage() {
     setTweenFactor(api)
     tweenOpacity(api)
     api.on('reInit', setTweenFactor).on('reInit', tweenOpacity).on('scroll', tweenOpacity).on('slideFocus', tweenOpacity)
-  }, [api, tweenOpacity])
+  }, [api, tweenOpacity, setTweenFactor])
 
   return (
     <Carousel setApi={setApi} plugins={[AutoScroll({ stopOnInteraction: false })]} opts={{ align: 'center', loop: true, skipSnaps: true }} className='w-full'>
       <CarouselContent className='w-full'>
         {imageSlides.map((image, index) => (
-          <CarouselItem key={index} className='basis-1/3 md:basis-[16.67%]'>
+          <CarouselItem key={index} className='basis-1/3 sm:basis-1/5 md:basis-[14.2857143%]'>
             <div className='relative aspect-[2/3] overflow-hidden rounded-md'>
-              <UnsplashImage {...image} fill sizes='' />
+              <UnsplashImage priority {...image} fill sizes='(min-width: 780px) calc(16.67vw - 16px), calc(33.26vw - 16px)' />
             </div>
           </CarouselItem>
         ))}

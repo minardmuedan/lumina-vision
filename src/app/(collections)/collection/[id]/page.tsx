@@ -3,7 +3,14 @@ import UnsplashImage from '@/components/unsplash-image'
 import { User } from '@/components/users/components'
 import { getCollection } from '@/lib/unsplash/collections'
 
-export default async function CollectionDetailsPage({ params }: { params: { id: string } }) {
+type Props = { params: { id: string } }
+
+export async function generateMetadata({ params }: Props) {
+  const collection = await getCollection(params.id)
+  return { title: `${collection.title} - Collection`, description: `${collection.description}` }
+}
+
+export default async function CollectionDetailsPage({ params }: Props) {
   const collection = await getCollection(params.id)
 
   return (

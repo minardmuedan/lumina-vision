@@ -9,7 +9,14 @@ import { getPhoto } from '@/lib/unsplash/photos'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 
-export default async function PhotoDetailsPage({ params }: { params: { slug: string } }) {
+type Props = { params: { slug: string } }
+
+export async function generateMetadata({ params }: Props) {
+  const photo = await getPhoto(params.slug)
+  return { title: `${photo.description || photo.slug.split('-').join(' ')}`, description: `photo details ${photo.description}` }
+}
+
+export default async function PhotoDetailsPage({ params }: Props) {
   const photo = await getPhoto(params.slug)
   const sizes = '(min-width: 640px) 37.5vw, calc(100vw - 16px)'
 

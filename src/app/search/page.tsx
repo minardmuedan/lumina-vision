@@ -2,7 +2,16 @@ import InfiniteScrollGallery from '@/components/photos/infinite-scroll'
 import { getSearchPhotos } from '@/lib/unsplash/search'
 import { SearchNoResult } from './_components'
 
-export default async function SearchPhotosPage({ searchParams: { query } }: { searchParams: { query: string } }) {
+type Props = { searchParams: { query: string } }
+
+export const generateMetadata = ({ searchParams: { query } }: Props) => {
+  return {
+    title: `Search Results for '${query}' - Image Gallery`,
+    description: `Find images matching your search for '${query}'.`,
+  }
+}
+
+export default async function SearchPhotosPage({ searchParams: { query } }: Props) {
   const { total, photos } = await getSearchPhotos(query, 1)
   if (!photos.length) return <SearchNoResult />
 

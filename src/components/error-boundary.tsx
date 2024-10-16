@@ -43,8 +43,9 @@ class ErrorBoundary extends Component<Props, State> {
     const { className } = this.props
     if (hasError && error) {
       return (
-        <div className={cn('flex min-h-dvhMinusNav flex-col items-center justify-center', className)}>
-          <h2 className='mb-2 text-2xl'>Something went wrong</h2>
+        <div className={cn('flex min-h-dvhMinusNav flex-col items-center justify-center px-3 text-center', className)}>
+          <h2 className='mb-2 font-calstavier text-3xl md:text-5xl'>Something went wrong</h2>
+          <p className='mb-5 text-sm text-muted-foreground'>We’re having trouble loading this content. Please refresh the page or try again later!</p>
           <Button onClick={this.reloadPage}>Reload Page</Button>
         </div>
       )

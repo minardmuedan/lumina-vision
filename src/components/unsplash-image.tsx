@@ -23,6 +23,7 @@ const UnsplashImage = memo((props: TProps & TImageSize) => {
         fill
         sizes={props.sizes}
         loader={unsplashImageLoader}
+        priority={props.priority}
         onLoad={() => setIsImageLoaded(true)}
         className={`object-cover transition-opacity ease-in ${isImageLoaded ? 'opacity-100' : 'opacity-0'} `}
       />
@@ -49,4 +50,5 @@ type TProps = {
   color?: string
   quality?: number
   className?: string
+  priority?: boolean
 }

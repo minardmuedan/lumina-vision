@@ -7,15 +7,17 @@ export function CollectionsContainer({ children, className }: { children: React.
   return <div className={cn('mb-2 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4', className)}>{children}</div>
 }
 
+type IndividualCollectionProps = {
+  collection: TCollection
+  className?: string
+  sizes?: string
+}
+
 export function IndividualCollection({
   collection,
   className,
   sizes = '(min-width: 1040px) calc(33.32vw - 58px), (min-width: 780px) calc(33.33vw - 32px), calc(50vw - 12px)',
-}: {
-  collection: TCollection
-  className?: string
-  sizes?: string
-}) {
+}: IndividualCollectionProps) {
   return (
     <Link key={collection.id} href={`/collection/${collection.id}/`} className={className}>
       <div className='group relative flex aspect-[10/6] items-center justify-center overflow-hidden rounded-lg bg-black p-1'>

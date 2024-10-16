@@ -6,6 +6,15 @@ import Image from 'next/image'
 import UserNavbar from './_navbar'
 import { Suspense } from 'react'
 
+export const generateMetadata = async ({ params }: { params: { username: string } }) => {
+  const user = await getUser(params.username)
+
+  return {
+    title: `${user.name} - Profile and Photos`,
+    description: `Explore the profile and photo collection of ${user.name}.`,
+  }
+}
+
 export default async function UserDetailsLayout({ children, params }: { children: React.ReactNode; params: { username: string } }) {
   const user = await getUser(params.username)
 

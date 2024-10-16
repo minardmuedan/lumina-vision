@@ -2,7 +2,18 @@ import UnsplashImage from '@/components/unsplash-image'
 import { User } from '@/components/users/components'
 import { getTopic } from '@/lib/unsplash/topics'
 
-export default async function TopicDetailsPage({ params }: { params: { slug: string } }) {
+type Props = { params: { slug: string } }
+
+export const generateMetadata = async ({ params }: Props) => {
+  const topic = await getTopic(params.slug)
+
+  return {
+    title: `${topic.title} - Explore Images by Topic`,
+    description: `${topic.description}`,
+  }
+}
+
+export default async function TopicDetailsPage({ params }: Props) {
   const topic = await getTopic(params.slug)
 
   return (
