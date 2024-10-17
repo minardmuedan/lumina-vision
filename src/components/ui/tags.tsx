@@ -8,7 +8,7 @@ export default function Tags({ tags, className }: { tags: TTag[]; className?: st
     <ul className={`flex flex-wrap justify-center gap-1 ${className}`}>
       {tags.map(({ title }, i) => (
         <li key={i}>
-          <Link href={`/search?query=${title}`} className={buttonVariants({ variant: 'secondary' })}>
+          <Link href={`/search?query=${title}`} className={buttonVariants({ variant: 'secondary' })} prefetch={false}>
             {title}
           </Link>
         </li>

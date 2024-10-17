@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { buttonVariants } from './ui/button'
 import SearchInputForm from './ui/input'
-import { SearchIcon } from 'lucide-react'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -17,7 +16,7 @@ export default function Navbar() {
         <Link href='/'>
           <p className='font-normal'>Minard</p>
         </Link>
-        <SearchIcon size={16} className='md:hidden' />
+        <SearchInputForm className='md:hidden' />
       </div>
 
       <div className='flex items-center gap-10'>
@@ -40,14 +39,3 @@ export default function Navbar() {
     </header>
   )
 }
-
-/*
-<nav className='flex w-full justify-between md:w-fit md:gap-10'>
-          {navlinks.map((href, index) => (
-            <Link key={index} href={href} className={pathname === href ? 'font-normal underline' : 'text-muted-foreground'}>
-              {index == 0 ? 'home' : href.slice(1)}
-            </Link>
-          ))}
-        </nav>
-
-*/

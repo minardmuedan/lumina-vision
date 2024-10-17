@@ -20,7 +20,12 @@ export default function UserNavbar({ username, totalPhotos, totalCollections, to
       {navlinks.map((link, i) => {
         const isActive = i === 0 ? pathname === `/user/${username}` : pathname.includes(`/${link}`)
         return (
-          <Link key={i} href={`/user/${username}/${i === 0 ? '' : link}`} className={buttonVariants({ variant: isActive ? 'default' : 'ghost' })}>
+          <Link
+            key={i}
+            href={`/user/${username}/${i === 0 ? '' : link}`}
+            className={buttonVariants({ variant: isActive ? 'default' : 'ghost' })}
+            prefetch={false}
+          >
             <Icon icon={link} white={isActive} />
             <p className='first-letter:uppercase'>
               {link} {total[i]}

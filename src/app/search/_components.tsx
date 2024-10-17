@@ -25,7 +25,12 @@ export function SearchNavbar() {
       {(['photos', 'collections', 'users'] as const).map((link, i) => {
         const isActive = i == 0 ? pathname === `/search` : pathname.includes(`/${link}`)
         return (
-          <Link key={i} href={`/search${i == 0 ? '' : `/${link}`}?query=${query}`} className={buttonVariants({ variant: isActive ? 'default' : 'ghost' })}>
+          <Link
+            key={i}
+            href={`/search${i == 0 ? '' : `/${link}`}?query=${query}`}
+            className={buttonVariants({ variant: isActive ? 'default' : 'ghost' })}
+            prefetch={false}
+          >
             <Icon icon={link} white={isActive} />
             <p className='first-letter:uppercase'>{link}</p>
           </Link>

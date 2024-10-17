@@ -7,7 +7,7 @@ import UserNavbar from './_navbar'
 import { Suspense } from 'react'
 
 export const generateMetadata = async ({ params }: { params: { username: string } }) => {
-  const user = await getUser(params.username)
+  const user = await getUser(params.username + 'mi')
 
   return {
     title: `${user.name} - Profile and Photos`,

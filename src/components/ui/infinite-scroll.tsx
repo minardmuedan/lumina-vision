@@ -11,7 +11,7 @@ export function InfiniteScrollLoader() {
 
 export function InfiniteScrollError({ message, refetch }: { message: string; refetch: () => void }) {
   return (
-    <div className='flex flex-col items-center gap-2 py-5'>
+    <div className='flex flex-col items-center gap-2 py-5 text-center'>
       <p>{message}</p>
       <Button onClick={refetch}>Retry</Button>
     </div>

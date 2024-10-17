@@ -6,25 +6,19 @@ import UnsplashImage from '../unsplash-image'
 export default function CollectionsFeatureSection() {
   return (
     <section className='mx-auto flex min-h-dvh w-full flex-col items-center justify-center gap-20 px-2 pt-40 text-center md:flex-row md:gap-0 2xl:min-h-fit 2xl:max-w-6xl'>
-      <div className='flex w-full flex-col gap-5 md:flex-1'>
-        <ul className='flex gap-5'>
-          <li className='w-1/4'></li>
-          <Collection
-            collection={collections[0]}
-            sizes='(min-width: 1540px) 200px, (min-width: 1480px) calc(40vw - 309px), (min-width: 780px) calc(21.91vw - 45px), calc(40vw - 29px)'
-          />
-          <Collection
-            collection={collections[1]}
-            sizes='(min-width: 1540px) 200px, (min-width: 1480px) calc(40vw - 309px), (min-width: 780px) calc(21.91vw - 45px), calc(40vw - 29px)'
-          />
-          <li className='w-1/4'></li>
+      <div className='flex w-full flex-col gap-2 md:flex-1 md:gap-5'>
+        <ul className='flex gap-2 md:gap-5'>
+          <li className='w-[calc(25%-5px)] md:w-[calc(25%-12.5px)]'></li>
+          <Collection collection={collections[0]} />
+          <Collection collection={collections[1]} />
+          <li className='w-[calc(25%-5px)] md:w-[calc(25%-12.5px)]'></li>
         </ul>
-        <ul className='flex gap-5'>
+        <ul className='flex gap-2 md:gap-5'>
           <Collection collection={collections[2]} />
           <Collection collection={collections[3]} />
           <li className='w-1/2'></li>
         </ul>
-        <ul className='flex gap-5'>
+        <ul className='flex gap-2 md:gap-5'>
           <li className='w-1/2'></li>
           <Collection collection={collections[4]} />
           <Collection collection={collections[5]} />
@@ -46,13 +40,9 @@ export default function CollectionsFeatureSection() {
   )
 }
 
-const Collection = ({
-  collection,
-  sizes = '(min-width: 1540px) 208px, (min-width: 1480px) calc(40vw - 301px), (min-width: 780px) calc(21.91vw - 37px), calc(40vw - 21px)',
-}: {
-  collection: (typeof collections)[0]
-  sizes?: string
-}) => {
+const Collection = ({ collection }: { collection: (typeof collections)[0] }) => {
+  const sizes = '(min-width: 1540px) 208px, (min-width: 1480px) calc(40vw - 301px), (min-width: 780px) calc(21.91vw - 37px), calc(40vw - 12px)'
+
   return (
     <li className='relative grid aspect-[10/6] w-full place-items-center overflow-hidden rounded-md bg-black p-1'>
       <UnsplashImage {...collection.coverPhoto} fill sizes={sizes} className='opacity-65' />
