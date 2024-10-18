@@ -10,7 +10,7 @@ import Footer from '@/components/footer'
 const bricolageGrotesque = Bricolage_Grotesque({ subsets: ['latin'], weight: ['300', '400'] })
 const calstavier = localFont({ src: './Calstavier.ttf', variable: '--font-calstavier' })
 
-export const metadata: Metadata = { title: 'Lumina Vision', description: 'A Gallery browsing app made by great Minard Parilla.' }
+export const metadata: Metadata = { title: 'Lumina Vision', description: 'A Gallery browsing app made by great Minard Parilla.', icons: '/logo.svg' }
 
 export default function RootLayout({ children, modal }: TLayoutProps) {
   return (

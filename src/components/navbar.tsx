@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { buttonVariants } from './ui/button'
 import SearchInputForm from './ui/input'
+import Image from 'next/image'
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -14,7 +15,10 @@ export default function Navbar() {
     <header className='sticky top-0 z-30 flex w-full flex-col justify-between gap-4 border-b bg-background px-4 py-4 sm:px-8 md:h-14 md:flex-row md:items-center md:px-10 md:py-0'>
       <div className='flex items-center justify-between gap-10'>
         <Link href='/'>
-          <p className='font-normal'>Minard</p>
+          <div className='flex items-center gap-2'>
+            <p className='font-normal'>Lumina</p>
+            <Image src='/logo.svg' alt='lumina vision logo' height={16} width={56} />
+          </div>
         </Link>
         <SearchInputForm className='md:hidden' />
       </div>
