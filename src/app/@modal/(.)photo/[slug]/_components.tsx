@@ -12,7 +12,7 @@ export default function ModalWrapper({ children }: { children: React.ReactNode }
   return (
     <RemoveScroll>
       <section onClick={() => router.back()} className='fixed inset-0 z-50 overflow-y-auto bg-black/20 pt-60'>
-        <div onClick={e => e.stopPropagation()} className='relative min-h-[calc(100dvh-15rem)] bg-background px-5 py-10 sm:px-10'>
+        <div onClick={e => e.stopPropagation()} className='relative min-h-[calc(100dvh-15rem)] bg-background px-2 py-10 md:px-10 lg:px-20'>
           <div className='absolute right-2 top-2 flex justify-end'>
             <Button variant='ghost' size='icon' onClick={() => router.back()}>
               <Icon icon='close' /> <span className='sr-only'>close photo modal</span>
