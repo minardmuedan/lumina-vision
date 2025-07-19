@@ -5,4 +5,4 @@ export const formatTag = (tag: TTag): TTag => ({
   type: tag.type,
 })
 
-export const formatTags = (tags: TTag[]): TTag[] => tags.map(tag => formatTag(tag))
+export const formatTags = (tags: TTag[]): TTag[] => tags?.map(tag => formatTag(tag))

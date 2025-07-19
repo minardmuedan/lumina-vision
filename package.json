@@ -17,7 +17,7 @@
     "embla-carousel-auto-scroll": "^8.3.0",
     "embla-carousel-react": "^8.3.0",
     "lucide-react": "^0.447.0",
-    "next": "14.2.14",
+    "next": "^14.2.30",
     "react": "^18",
     "react-blurhash": "^0.3.0",
     "react-dom": "^18",
