@@ -5,7 +5,7 @@ export default function middleware(req: NextRequest) {
 
   if (nextUrl.pathname.startsWith('/api/unsplash')) {
     // change this with your base url
-    const allowedOrigin = 'https://lumina-vision.vercel.app'
+    const allowedOrigin = 'https://luminavision.vercel.app'
 
     const origin = headers.get('origin') || headers.get('referer')
 
