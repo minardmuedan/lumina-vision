@@ -1,12 +1,13 @@
 import Icon from '@/components/icon'
 import Link from 'next/link'
 import FooterWrapper from './footer-wrapper'
+import { Button } from './ui/button'
 
 export default function Footer() {
   const links = [
-    { icon: 'photos', title: 'Gallery', description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit' },
-    { icon: 'collections', title: 'Collections', description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit' },
-    { icon: 'users', title: 'User / Photographer', description: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit' },
+    { icon: 'photos', title: 'Gallery', description: 'Explore a wide range of high-quality, optimized photos' },
+    { icon: 'collections', title: 'Collections', description: 'Discover curated photo sets organized by unique themes' },
+    { icon: 'users', title: 'User / Photographer', description: 'View and follow a photographer’s complete visual portfolio' },
   ] as const
 
   const socmedLinks = [
@@ -49,13 +50,16 @@ export default function Footer() {
 
         <div className='flex w-full flex-col items-center justify-between gap-5 border-t pt-14 md:flex-row'>
           <p className='text-sm text-muted-foreground'>© 2024 · Minard Parilla | All rights reserved</p>
-          <nav className='flex items-center gap-10'>
+          <nav className='flex items-center gap-5 md:gap-10'>
             {socmedLinks.map((socmed, i) => (
-              <Link key={i} href={socmed.href}>
+              <Link key={i} href={socmed.href} target='_blank'>
                 <Icon icon={`socmed/${socmed.label}`} size={20} />
                 <span className='sr-only'> social media {socmed.label}</span>
               </Link>
             ))}
+            <Button asChild>
+              <Link href='https://minardparilla.vercel.app' target='_blank'>{`minard's portfolio`}</Link>
+            </Button>
           </nav>
         </div>
       </footer>
